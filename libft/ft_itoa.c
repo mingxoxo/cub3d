@@ -3,58 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/09 02:31:55 by wonyang           #+#    #+#             */
-/*   Updated: 2022/07/09 14:50:50 by wonyang          ###   ########.fr       */
+/*   Created: 2022/07/13 02:32:58 by jeongmin          #+#    #+#             */
+/*   Updated: 2022/07/20 15:31:49 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	count_length(long n)
+static size_t	count_size(long long nbr)
 {
-	size_t	count;
+	if (nbr / 10 == 0)
+		return (1);
+	return (count_size(nbr / 10) + 1);
+}
 
-	count = 0;
-	if (n <= 0)
+static void	fill_array(char *dst, long long ln, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	if (ln < 0)
 	{
-		n *= -1;
-		count++;
+		dst[i] = '-';
+		i++;
+		ln *= -1;
 	}
-	while (n)
+	while (size > i)
 	{
-		n /= 10;
-		count++;
+		dst[size - 1] = ln % 10 + '0';
+		size--;
+		ln /= 10;
 	}
-	return (count);
 }
 
 char	*ft_itoa(int n)
 {
-	size_t	i;
-	size_t	len;
-	char	*res;
-	long	num;
+	size_t		size;
+	long long	ln;
+	char		*dst;
 
-	num = (long)n;
-	len = count_length(num);
-	res = (char *)ft_calloc(len + 1, sizeof(char));
-	if (!res)
-		return (res);
-	i = len - 1;
-	if (num < 0)
-	{
-		res[0] = '-';
-		num *= -1;
-	}
-	if (num == 0)
-		res[0] = '0';
-	while (num)
-	{
-		res[i] = num % 10 + '0';
-		num /= 10;
-		i--;
-	}
-	return (res);
+	size = 0;
+	ln = (long long)n;
+	if (ln < 0)
+		size = 1;
+	size = size + count_size(ln);
+	dst = (char *)ft_calloc(size + 1, sizeof(char));
+	if (!dst)
+		return (NULL);
+	fill_array(dst, ln, size);
+	return (dst);
 }

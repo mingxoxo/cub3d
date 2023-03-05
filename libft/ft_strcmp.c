@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_freesplit_bonus.c                               :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/04 13:15:04 by wonyang           #+#    #+#             */
-/*   Updated: 2022/12/04 13:21:42 by wonyang          ###   ########seoul.kr  */
+/*   Created: 2022/07/20 15:07:27 by jeongmin          #+#    #+#             */
+/*   Updated: 2022/12/09 18:51:17 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-void	ft_freesplit(char **str)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	int		i;
-
-	i = 0;
-	while (str[i])
+	while (*s1 == *s2 && *s1 != '\0')
 	{
-		free(str[i]);
-		str[i] = NULL;
-		i++;
+		s1++;
+		s2++;
 	}
-	free(str);
+	return ((unsigned char)(*s1) - (unsigned char)(*s2));
 }

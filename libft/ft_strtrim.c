@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtirm.c                                       :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/08 18:04:32 by wonyang           #+#    #+#             */
-/*   Updated: 2022/07/09 20:54:13 by wonyang          ###   ########.fr       */
+/*   Created: 2022/07/13 01:26:44 by jeongmin          #+#    #+#             */
+/*   Updated: 2022/07/20 15:27:46 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,23 @@
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t	start;
-	size_t	end;
+	size_t	i;
+	size_t	j;
+	char	*dst;
 
-	start = 0;
-	end = ft_strlen(s1) - 1;
-	while (s1[start] && ft_strchr(set, s1[start]))
-		start++;
-	if (start > end)
+	i = 0;
+	j = ft_strlen(s1);
+	if (j == 0)
 		return ((char *)ft_calloc(1, sizeof(char)));
-	while (end >= 0 && s1[end] && ft_strchr(set, s1[end]))
-		end--;
-	return (ft_substr(s1, start, end - start + 1));
+	while (s1[i] && ft_strchr(set, s1[i]))
+		i++;
+	if (s1[i] == '\0')
+		return ((char *)ft_calloc(1, sizeof(char)));
+	while (s1[j - 1] && ft_strchr(set, s1[j - 1]))
+		j--;
+	dst = (char *)ft_calloc(j - i + 1, sizeof(char));
+	if (!dst)
+		return (NULL);
+	ft_strlcpy(dst, s1 + i, j - i + 1);
+	return (dst);
 }

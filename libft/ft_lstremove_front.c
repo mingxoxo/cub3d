@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeongmin <jeongmin@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/13 03:16:55 by jeongmin          #+#    #+#             */
-/*   Updated: 2022/07/20 15:49:46 by jeongmin         ###   ########.fr       */
+/*   Created: 2022/07/13 03:13:57 by jeongmin          #+#    #+#             */
+/*   Updated: 2022/07/20 15:50:41 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstlast(t_list *lst)
+void	ft_lstremove_front(t_list **cmd)
 {
-	if (!lst)
-		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
+	t_list	*del;
+
+	del = (*cmd)->next;
+	(*cmd)->next = del->next;
+	free(del);
 }

@@ -3,30 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/06 14:20:46 by wonyang           #+#    #+#             */
-/*   Updated: 2022/12/04 13:14:09 by wonyang          ###   ########seoul.kr  */
+/*   Created: 2022/07/12 23:55:42 by jeongmin          #+#    #+#             */
+/*   Updated: 2022/07/20 15:24:53 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*res;
-	size_t	str_len;
+	size_t	size;
+	size_t	s_len;
+	char	*dst;
 
-	str_len = ft_strlen(s);
-	if (start >= str_len)
-		return (ft_strdup(""));
-	if (str_len >= len + start)
-		res = (char *)malloc((len + 1) * sizeof(char));
+	s_len = ft_strlen(s);
+	if (s_len <= start)
+		size = 0;
+	else if (start + len <= s_len)
+		size = len;
 	else
-		res = (char *)malloc((str_len - start + 1) * sizeof(char));
-	if (!res)
-		return (res);
-	ft_strlcpy(res, s + start, len + 1);
-	return (res);
+		size = s_len - start + 1;
+	dst = (char *)ft_calloc(size + 1, sizeof(char));
+	if (!dst)
+		return (dst);
+	if (size == 0)
+		return (dst);
+	ft_strlcpy(dst, s + start, size + 1);
+	return (dst);
 }

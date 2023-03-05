@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/10 00:15:23 by wonyang           #+#    #+#             */
-/*   Updated: 2022/12/04 13:21:05 by wonyang          ###   ########seoul.kr  */
+/*   Created: 2022/07/13 03:19:11 by jeongmin          #+#    #+#             */
+/*   Updated: 2022/07/20 15:47:45 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
 t_list	*ft_lstnew(void *content)
@@ -20,7 +19,7 @@ t_list	*ft_lstnew(void *content)
 	node = (t_list *)malloc(sizeof(t_list));
 	if (!node)
 		return (node);
-	node->next = NULL;
 	node->content = content;
+	node->next = NULL;
 	return (node);
 }

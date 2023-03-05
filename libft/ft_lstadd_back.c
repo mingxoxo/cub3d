@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/10 00:30:56 by wonyang           #+#    #+#             */
-/*   Updated: 2022/07/10 02:04:36 by wonyang          ###   ########.fr       */
+/*   Created: 2022/07/13 03:13:57 by jeongmin          #+#    #+#             */
+/*   Updated: 2022/07/20 15:50:41 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 
 	last = ft_lstlast(*lst);
 	if (!last)
-	{
 		*lst = new;
-		return ;
-	}
-	last->next = new;
+	else
+		last->next = new;
 }

@@ -3,32 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/09 05:03:34 by wonyang           #+#    #+#             */
-/*   Updated: 2022/07/12 16:53:17 by wonyang          ###   ########.fr       */
+/*   Created: 2022/07/13 00:59:54 by jeongmin          #+#    #+#             */
+/*   Updated: 2022/07/20 15:46:34 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-static void	int_to_char(int n, int fd)
+static void	ft_putchar(char c, int fd)
 {
-	char	c[12];
-	int		idx;
+	write(fd, &c, 1);
+}
 
-	idx = 0;
-	while (n > 0)
+static void	ft_putnbr_recursion(int nb, int fd)
+{
+	if (nb < 10)
 	{
-		c[idx] = n % 10 + '0';
-		idx++;
-		n /= 10;
+		ft_putchar(nb + '0', fd);
 	}
-	idx--;
-	while (idx >= 0)
+	else
 	{
-		write(fd, &c[idx], 1);
-		idx--;
+		ft_putnbr_recursion(nb / 10, fd);
+		ft_putchar(nb % 10 + '0', fd);
 	}
 }
 
@@ -36,14 +34,13 @@ void	ft_putnbr_fd(int n, int fd)
 {
 	if (n == -2147483648)
 		write(fd, "-2147483648", 11);
-	else if (n == 0)
-		write(fd, "0", 1);
-	else if (n < 0)
-	{
-		n = n * -1;
-		write(fd, "-", 1);
-		int_to_char(n, fd);
-	}
 	else
-		int_to_char(n, fd);
+	{
+		if (n < 0)
+		{
+			ft_putchar('-', fd);
+			n *= -1;
+		}
+		ft_putnbr_recursion(n, fd);
+	}
 }

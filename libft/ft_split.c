@@ -3,105 +3,84 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/08 18:36:14 by wonyang           #+#    #+#             */
-/*   Updated: 2022/12/04 13:14:25 by wonyang          ###   ########seoul.kr  */
+/*   Created: 2022/07/13 02:09:04 by jeongmin          #+#    #+#             */
+/*   Updated: 2022/07/20 15:30:56 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-static void	free_all(char **result)
+static size_t	count_split_strs(const char *str, char c)
 {
-	size_t	i;
+	int		first;
+	size_t	cnt;
 
-	i = 0;
-	while (result[i])
+	first = 1;
+	cnt = 0;
+	while (*str)
 	{
-		free(result[i]);
-		i++;
+		if (*str == c)
+			first = 1;
+		else if (first == 1)
+		{
+			cnt++;
+			first = 0;
+		}
+		str++;
 	}
-	free(result);
+	return (cnt);
 }
 
-static char	**count_word(const char *str, char c)
-{
-	int		i;
-	int		count;
-	char	**result;
-
-	i = 0;
-	count = 0;
-	while (str[i])
-	{
-		while (str[i] == c)
-			i++;
-		if (str[i] != c && str[i] != '\0')
-			count++;
-		while (str[i] != c && str[i] != '\0')
-			i++;
-	}
-	result = (char **)ft_calloc(count + 1, sizeof(char *));
-	if (!result)
-		return (result);
-	return (result);
-}
-
-static int	skip_split(const char *str, char c, int n)
+static void	free_two_array(char ***str)
 {
 	int	i;
 
-	i = n;
-	while (str[i] && str[i] == c)
+	i = 0;
+	while ((*str)[i])
+	{
+		free((*str)[i]);
 		i++;
-	return (i);
+	}
+	free(*str);
+	*str = 0;
 }
 
-static int	input_value(const char *s, int *arr, char **result, char c)
+static char	**split_array(char **dst, char *str, char c, size_t cnt)
 {
-	while (s[arr[1]])
+	size_t	i;
+	size_t	len;
+
+	i = 0;
+	while (i < cnt)
 	{
-		if (s[arr[1]] == c)
+		while (*str == c)
+			str++;
+		len = 0;
+		while (str[len] && str[len] != c)
+			len++;
+		dst[i] = (char *)ft_calloc(len + 1, sizeof(char));
+		if (dst[i] == 0)
 		{
-			result[arr[2]] = ft_substr(s, arr[0], arr[1] - arr[0]);
-			if (!result[arr[2]])
-			{
-				free_all(result);
-				return (1);
-			}
-			arr[2]++;
-			arr[1] = skip_split(s, c, arr[1]);
-			arr[0] = arr[1];
-			continue ;
+			free_two_array(&dst);
+			return (NULL);
 		}
-		arr[1]++;
+		ft_strlcpy(dst[i], str, len + 1);
+		str += len + 1;
+		i++;
 	}
-	return (0);
+	return (dst);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**result;
-	int		arr[3];
+	size_t	cnt;
+	char	**dst;
 
-	result = count_word(s, c);
-	if (!result)
-		return (result);
-	arr[1] = skip_split(s, c, 0);
-	arr[0] = arr[1];
-	arr[2] = 0;
-	if (input_value(s, arr, result, c))
-		return (0);
-	if (s[arr[0]] != '\0')
-	{
-		result[arr[2]] = ft_substr(s, arr[0], arr[1] - arr[0]);
-		if (!result[arr[2]])
-		{
-			free_all(result);
-			return (0);
-		}
-	}
-	return (result);
+	cnt = count_split_strs(s, c);
+	dst = (char **)ft_calloc(cnt + 1, sizeof(char *));
+	if (!dst || !split_array(dst, (char *)s, c, cnt))
+		return (NULL);
+	return (dst);
 }
