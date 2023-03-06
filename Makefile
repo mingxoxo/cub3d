@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+         #
+#    By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/04 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/03/05 19:05:22 by jeongmin         ###   ########.fr        #
+#    Updated: 2023/03/07 01:18:23 by jeongmin         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,8 +40,9 @@ FUNC_DIR		= ft_func/
 
 _FUNC_SRCS	= error_exit.c \
 			  file.c \
-			  free.c \
-			  lst.c
+			  memory.c \
+			  lst.c \
+			  math.c
 
 FUNC_SRCS	= $(addprefix $(FUNC_DIR), $(_FUNC_SRCS))
 

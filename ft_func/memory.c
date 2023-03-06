@@ -1,17 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   memory.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 20:32:48 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/05 19:00:50 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/07 01:52:24 by jeongmin         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "cub3d.h"
+
+void	*ft_malloc(size_t size, t_param *param)
+{
+	void	*new;
+
+	new = malloc(size);
+	if (!new)
+		ft_perror_exit(NULL, param);
+	return (new);
+}
 
 char	**ft_free_two_array(char ***str)
 {
@@ -30,7 +40,7 @@ char	**ft_free_two_array(char ***str)
 
 void	ft_free_param(t_param *param)
 {
-	if (param)
-		free(param);
+	if (param->map.arr)
+		ft_free_two_array(&(param->map.arr));
 	return ;
 }
