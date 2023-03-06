@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/26 20:35:05 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/05 19:10:19 by jeongmin         ###   ########.fr       */
+/*   Created: 2022/03/05 20:35:05 by jeongmin          #+#    #+#             */
+/*   Updated: 2023/03/07 02:30:40 by jeongmin         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,22 @@ static void	check_arg(int argc, char **argv)
 		ft_error_exit("Arguments: A map in format *.cub", NULL);
 }
 
+static void	init_param(t_param *param)
+{
+	param->info.sx = 0;
+	param->info.sy = 0;
+	param->map.height = 0;
+	param->map.width = 0;
+	param->map.arr = NULL;
+}
+
 int	main(int argc, char **argv)
 {
 	t_param	param;
 
 	check_arg(argc, argv);
+	init_param(&param);
 	parse_map(argv[1], &param);
+	ft_free_param(&param);
 	return (0);
 }
