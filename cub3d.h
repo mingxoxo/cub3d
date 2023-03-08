@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/07 01:19:12 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/08 17:21:44 by jeongmin         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_param
 
 //parsing
 char	**parse_map(char *filename, t_param *param);
+void	check_map(t_param *param, t_list *lst);
 
 // ft_func
 int		ft_open(const char *path, t_param *param);

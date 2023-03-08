@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 20:35:05 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/07 02:30:40 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/08 17:13:41 by jeongmin         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static void	check_arg(int argc, char **argv)
 
 static void	init_param(t_param *param)
 {
-	param->info.sx = 0;
-	param->info.sy = 0;
+	param->info.sx = -1;
+	param->info.sy = -1;
 	param->map.height = 0;
 	param->map.width = 0;
 	param->map.arr = NULL;

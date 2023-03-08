@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 17:13:33 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/07 02:33:30 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/08 17:21:02 by jeongmin         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ char	**parse_map(char *filename, t_param *param)
 	lst = read_map(filename, param);
 	allocate_map(param, lst);
 	cast_map(param, lst);
+	check_map(param, lst);
 	// print_lst(lst);
 	// print_arr(param->map.arr);
 	// printf("w: %d h: %d\n", param->map.width, param->map.height);
