@@ -6,7 +6,7 @@
 #    By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/04 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/03/07 01:18:23 by jeongmin         ###   ########seoul.kr   #
+#    Updated: 2023/03/08 17:21:28 by jeongmin         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ CFLAGS		= -Wall -Werror -Wextra
 # parsing part source files
 PARSING_DIR		= parsing/
 
-_PARSING_SRCS	= parse_map.c
+_PARSING_SRCS	= parse_map.c \
+				  check_map.c
 
 PARSING_SRCS	= $(addprefix $(PARSING_DIR), $(_PARSING_SRCS))
 
