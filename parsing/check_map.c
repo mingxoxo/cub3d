@@ -3,23 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 17:13:33 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/08 17:24:33 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/09 17:44:08 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	check_char(t_param *param, char **s)
+static char	*check_char(t_info *info, char **arr)
 {
 	int		i;
 	int		j;
-	char	**arr;
 
 	i = 0;
-	arr = param->map.arr;
 	while (arr[i])
 	{
 		j = 0;
@@ -27,39 +25,31 @@ static int	check_char(t_param *param, char **s)
 		{
 			if (ft_strchr("NSEW", arr[i][j]))
 			{
-				if (param->info.sx != -1 || param->info.sy != -1)
-				{
-					*s = "map: There must be one player.";
-					return (1);
-				}
-				param->info.sy = i;
-				param->info.sx = j;
+				if (info->sx != -1 || info->sy != -1)
+					return ("map: There must be one player.");
+				info->sy = i;
+				info->sx = j;
 			}
 			else if (ft_strchr("01 ", arr[i][j]) == NULL)
-			{
-				*s = "map: The character must be 0, 1, N, S, E, W, or space.";
-				return (1);
-			}
+				return ("map: The character must be  \
+							  0, 1, N, S, E, W or space.");
 			j++;
 		}
 		i++;
 	}
-	if (param->info.sx == -1 && param->info.sy == -1)
-	{
-		*s = "map: There must be one player.";
-		return (1);
-	}
+	if (info->sx == -1 && info->sy == -1)
+		return ("map: There must be one player.");
 	return (0);
 }
 
 void	check_map(t_param *param, t_list *lst)
 {
-	char	*s;
+	char	*error_msg;
 
-	s = NULL;
-	if (check_char(param, &s))
+	error_msg = check_char(&(param->info), param->map.arr);
+	if (error_msg)
 	{
 		ft_lstclear(&lst, free);
-		ft_error_exit(s, param);
+		ft_error_exit(error_msg, param);
 	}
 }
