@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/08 17:21:44 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/09 17:55:52 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 
 # include <stdio.h>
 # include "libft.h"
+
+typedef struct s_node
+{
+	int				x;
+	int				y;
+	struct s_node	*prev;
+	struct s_node	*next;
+}					t_node;
 
 typedef struct s_img
 {
