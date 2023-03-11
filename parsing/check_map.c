@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 17:13:33 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/09 18:24:27 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/11 22:19:45 by jeongmin         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,20 @@
 
 static int	is_path(int n[2], int h, int w, char **arr)
 {
-	if (0 < n[X] && n[X] < h && 0 < n[Y] && n[Y] < w)
+	if (0 <= n[X] && n[X] < h && 0 <= n[Y] && n[Y] < w)
 	{
-		if (arr[n[X]][n[Y]] == '1' || visited[n[X]][n[Y]] == 'O')
-			return (ERROR);
-		visited[n[X]][n[Y]] = 'O';
-		if (arr[n[X]][n[Y]] == 'C')
-			chk->item--;
-		else if (arr[n[X]][n[Y]] == 'E')
-			chk->exit--;
-		return (SUCCESS);
+		if (arr[n[X]][n[Y]] == '1' || arr[n[X]][n[Y]] == '_')
+			return (1);
+		if (n[X] == 0 || n[X] == h - 1 || n[Y] == 0 || n[Y] == w - 1)
+			return (-1);
+		if (arr[n[X]][n[Y]] == ' ')
+			return (-1);
+		return (0);
 	}
-	return (ERROR);
+	return (-1);
 }
 
-static int	bfs(t_node *queue, char **arr, int sx, int sy)
+static int	bfs(t_node *queue, t_map *map, int sx, int sy)
 {
 	int			i;
 	int			n[2];
@@ -46,8 +45,11 @@ static int	bfs(t_node *queue, char **arr, int sx, int sy)
 			n[X] = cor[X] + d[X][i];
 			n[Y] = cor[Y] + d[Y][i];
 			i++;
-			if (is_path(chk, n, visited, arr) == ERROR)
+			if (is_path(n, map->height, map->width, map->arr) == -1)
+				return (-1);
+			if (is_path(n, map->height, map->width, map->arr))
 				continue ;
+			(map->arr)[n[X]][n[Y]] = '_';
 			if (enqueue(queue, n[X], n[Y]))
 				return (1);
 		}
@@ -56,7 +58,7 @@ static int	bfs(t_node *queue, char **arr, int sx, int sy)
 	return (0);
 }	
 
-static int	check_path(t_info *info, char **arr)
+static int	check_path(t_map *map, char **arr)
 {
 	int		i;
 	int		j;
@@ -71,8 +73,9 @@ static int	check_path(t_info *info, char **arr)
 		{
 			if (ft_strchr("NSEW0", arr[i][j]))
 			{
+				queue = NULL;
 				arr[i][j] = '_';
-				errno = bfs(queue, map->arr, i, j);
+				errno = bfs(queue, map, i, j);
 				if (errno)
 					return (errno);
 			}
@@ -115,6 +118,7 @@ static char	*check_char(t_info *info, char **arr)
 
 void	check_map(t_param *param, t_list *lst)
 {
+	int		errno;
 	char	*error_msg;
 
 	error_msg = check_char(&(param->info), param->map.arr);
@@ -122,5 +126,13 @@ void	check_map(t_param *param, t_list *lst)
 	{
 		ft_lstclear(&lst, free);
 		ft_error_exit(error_msg, param);
+	}
+	errno = check_path(&(param->map), param->map.arr);
+	if (errno)
+	{
+		ft_lstclear(&lst, free);
+		if (errno == -1)
+			ft_error_exit("map: The map must be closed/surrounded by walls.", param);
+		ft_perror_exit("check_path", param);
 	}
 }
