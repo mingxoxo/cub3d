@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 17:13:33 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/11 22:19:45 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/12 19:51:08 by jeongmin         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,13 @@ static int	is_path(int n[2], int h, int w, char **arr)
 	return (-1);
 }
 
-static int	bfs(t_node *queue, t_map *map, int sx, int sy)
+static int	bfs(t_node *queue, int h, int w, char **arr)
 {
 	int			i;
 	int			n[2];
 	int			cor[2];
 	const int	d[2][4] = {{-1, 1, 0, 0}, {0, 0, -1, 1}};
 
-	if (init_queue(&queue, sx, sy))
-		return (1);
 	while (queue->next)
 	{
 		dequeue(queue, cor);
@@ -45,11 +43,11 @@ static int	bfs(t_node *queue, t_map *map, int sx, int sy)
 			n[X] = cor[X] + d[X][i];
 			n[Y] = cor[Y] + d[Y][i];
 			i++;
-			if (is_path(n, map->height, map->width, map->arr) == -1)
+			if (is_path(n, h, w, arr) == -1)
 				return (-1);
-			if (is_path(n, map->height, map->width, map->arr))
+			if (is_path(n, h, w, arr))
 				continue ;
-			(map->arr)[n[X]][n[Y]] = '_';
+			arr[n[X]][n[Y]] = '_';
 			if (enqueue(queue, n[X], n[Y]))
 				return (1);
 		}
@@ -73,9 +71,10 @@ static int	check_path(t_map *map, char **arr)
 		{
 			if (ft_strchr("NSEW0", arr[i][j]))
 			{
-				queue = NULL;
+				if (init_queue(&queue, i, j))
+					return (1);
 				arr[i][j] = '_';
-				errno = bfs(queue, map, i, j);
+				errno = bfs(queue, map->height, map->width, map->arr);
 				if (errno)
 					return (errno);
 			}
@@ -131,8 +130,9 @@ void	check_map(t_param *param, t_list *lst)
 	if (errno)
 	{
 		ft_lstclear(&lst, free);
+		error_msg = "map: The map must be closed/surrounded by walls.";
 		if (errno == -1)
-			ft_error_exit("map: The map must be closed/surrounded by walls.", param);
+			ft_error_exit(error_msg, param);
 		ft_perror_exit("check_path", param);
 	}
 }
