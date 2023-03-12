@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 17:13:33 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/12 19:51:08 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/12 20:02:12 by jeongmin         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static int	bfs(t_node *queue, int h, int w, char **arr)
 	while (queue->next)
 	{
 		dequeue(queue, cor);
+		arr[cor[X]][cor[Y]] = '_';
 		i = 0;
 		while (i < 4)
 		{
@@ -52,7 +53,6 @@ static int	bfs(t_node *queue, int h, int w, char **arr)
 				return (1);
 		}
 	}
-	ft_free_queue(&queue);
 	return (0);
 }	
 
@@ -73,8 +73,8 @@ static int	check_path(t_map *map, char **arr)
 			{
 				if (init_queue(&queue, i, j))
 					return (1);
-				arr[i][j] = '_';
 				errno = bfs(queue, map->height, map->width, map->arr);
+				ft_free_queue(&queue);
 				if (errno)
 					return (errno);
 			}
@@ -104,8 +104,8 @@ static char	*check_char(t_info *info, char **arr)
 				info->sy = j;
 			}
 			else if (ft_strchr("01 ", arr[i][j]) == NULL)
-				return ("map: The character must be  \
-							  0, 1, N, S, E, W or space.");
+				return ("map: The character must be \
+0, 1, N, S, E, W or space.");
 			j++;
 		}
 		i++;
