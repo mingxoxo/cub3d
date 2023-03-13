@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 20:35:05 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/08 17:13:41 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/13 22:55:34 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int argc, char **argv)
 
 	check_arg(argc, argv);
 	init_param(&param);
-	parse_map(argv[1], &param);
+	parse(argv[1], &param);
 	ft_free_param(&param);
 	return (0);
 }

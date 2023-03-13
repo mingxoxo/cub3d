@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/04 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/03/11 21:49:17 by jeongmin         ###   ########seoul.kr   #
+#    Updated: 2023/03/13 22:51:00 by jeongmin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ CFLAGS		= -Wall -Werror -Wextra
 # parsing part source files
 PARSING_DIR		= parsing/
 
-_PARSING_SRCS	= parse_map.c \
+_PARSING_SRCS	= parse.c \
+				  parse_map.c \
 				  check_map.c \
 				  ds_queue.c
 

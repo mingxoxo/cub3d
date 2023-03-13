@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/11 21:47:46 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/13 22:36:07 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 
 # define X 0
 # define Y 1
+
+# define TRUE 0
+# define FALSE 1
 
 typedef struct s_node
 {
@@ -54,7 +57,8 @@ typedef struct s_param
 }	t_param;
 
 // parsing
-char	**parse_map(char *filename, t_param *param);
+void	parse(char *filename, t_param *param);
+void	parse_map(t_list *lst, t_param *param);
 void	check_map(t_param *param, t_list *lst);
 
 // ft_func
