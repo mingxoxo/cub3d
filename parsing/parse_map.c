@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 17:13:33 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/09 17:44:32 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/13 18:48:38 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,14 @@ static void	cast_map(t_param *param, t_list *lst)
 // 	}
 // }
 
-// // debugging func
+// debugging func
 // static void	print_arr(char **map)
 // {
 // 	int	i;
 
 // 	i = 0;
+// 	printf("-------------------\n");
+// 	printf("[map]\n");
 // 	while (map[i])
 // 	{
 // 		printf("%s\n", map[i]);
@@ -126,6 +128,7 @@ char	**parse_map(char *filename, t_param *param)
 	allocate_map(param, lst);
 	cast_map(param, lst);
 	check_map(param, lst);
+	cast_map(param, lst);
 	ft_lstclear(&lst, free);
 	return (arr);
 }
