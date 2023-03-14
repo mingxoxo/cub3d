@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/13 22:36:07 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/14 18:44:04 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,34 @@ typedef struct s_node
 
 typedef struct s_img
 {
-	void	*img;
+	char	*path;
+	void	*ptr;
 	int		w;
 	int		h;
 }			t_img;
 
+typedef struct s_color
+{
+	char	*info;
+	int		r;
+	int		g;
+	int		b;
+}			t_color;
+
 typedef struct s_info
 {
-	int	sx;
-	int	sy;
+	t_img	no;
+	t_img	so;
+	t_img	we;
+	t_img	ea;
+	t_color	f;
+	t_color	c;
 }		t_info;
 
 typedef struct s_map
 {
+	int		sx;
+	int		sy;
 	int		height;
 	int		width;
 	char	**arr;
@@ -55,6 +70,9 @@ typedef struct s_param
 	t_map	map;
 	t_info	info;
 }	t_param;
+
+// init
+void	init_param(t_param *param);
 
 // parsing
 void	parse(char *filename, t_param *param);

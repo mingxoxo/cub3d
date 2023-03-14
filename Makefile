@@ -6,7 +6,7 @@
 #    By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/04 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/03/13 22:51:00 by jeongmin         ###   ########.fr        #
+#    Updated: 2023/03/14 18:43:49 by jeongmin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,8 @@ _GNL_SRCS	= get_next_line.c \
 GNL_SRCS	= $(addprefix $(GNL_DIR), $(_GNL_SRCS))
 
 # main source files
-SRCS		= main.c 
+SRCS		= main.c \
+			  init.c
 
 OBJS		= $(SRCS:%.c=%.o) \
 			  $(PARSING_SRCS:%.c=%.o) \

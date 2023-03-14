@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 17:13:33 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/12 20:02:12 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/14 18:45:15 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static int	check_path(t_map *map, char **arr)
 	return (errno);
 }
 
-static char	*check_char(t_info *info, char **arr)
+static char	*check_char(t_map *map, char **arr)
 {
 	int		i;
 	int		j;
@@ -98,10 +98,10 @@ static char	*check_char(t_info *info, char **arr)
 		{
 			if (ft_strchr("NSEW", arr[i][j]))
 			{
-				if (info->sx != -1 || info->sy != -1)
+				if (map->sx != -1 || map->sy != -1)
 					return ("map: There must be one player.");
-				info->sx = i;
-				info->sy = j;
+				map->sx = i;
+				map->sy = j;
 			}
 			else if (ft_strchr("01 ", arr[i][j]) == NULL)
 				return ("map: The character must be \
@@ -110,7 +110,7 @@ static char	*check_char(t_info *info, char **arr)
 		}
 		i++;
 	}
-	if (info->sx == -1 && info->sy == -1)
+	if (map->sx == -1 && map->sy == -1)
 		return ("map: There must be one player.");
 	return (0);
 }
@@ -120,7 +120,7 @@ void	check_map(t_param *param, t_list *lst)
 	int		errno;
 	char	*error_msg;
 
-	error_msg = check_char(&(param->info), param->map.arr);
+	error_msg = check_char(&(param->map), param->map.arr);
 	if (error_msg)
 	{
 		ft_lstclear(&lst, free);
