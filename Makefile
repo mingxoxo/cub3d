@@ -6,7 +6,7 @@
 #    By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/04 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/03/14 18:43:49 by jeongmin         ###   ########.fr        #
+#    Updated: 2023/03/14 19:08:14 by jeongmin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ CFLAGS		= -Wall -Werror -Wextra
 PARSING_DIR		= parsing/
 
 _PARSING_SRCS	= parse.c \
+				  parse_info.c \
 				  parse_map.c \
 				  check_map.c \
 				  ds_queue.c

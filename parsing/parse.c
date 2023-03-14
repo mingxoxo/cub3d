@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 19:13:33 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/13 22:54:21 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/14 22:55:30 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void	parse(char *filename, t_param *param)
 	map_lst = divide_lst(&lst);
 	print_lst(lst);
 	print_lst(map_lst);
+	parse_info(&lst, &map_lst, param);
 	ft_lstclear(&lst, free);
 	parse_map(map_lst, param);
 }
