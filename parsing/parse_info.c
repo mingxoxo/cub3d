@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:53:42 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/15 20:08:25 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/15 21:29:50 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,10 @@ void	parse_info(t_list **head, t_list **map_lst, t_param *param)
 	t_list	*lst;
 	char	*line;
 	char	**split;
+	int		errno;
 
 	lst = *head;
+	errno = 0;
 	while (lst)
 	{
 		line = (char *)(lst->content);
@@ -103,10 +105,19 @@ void	parse_info(t_list **head, t_list **map_lst, t_param *param)
 			ft_error_exit("element: 입력 형식 잘못됨", param);
 		}
 		if (split[0][0] == 'F' || split[0][0] == 'C')
-			parse_color(&param->info, split);
+			errno = parse_color(&param->info, split);
 		else
-			parse_texture(&param->info, split);
+			errno = parse_texture(&param->info, split);
 		ft_free_two_array(&split);
+		if (errno)
+		{
+			ft_lstclear(head, free);
+			ft_lstclear(map_lst, free);
+			if (errno == -1)
+				ft_error_exit("element: 입력 형식 잘못됨", param);
+			else
+				ft_perror_exit("param_info", param);
+		}
 	}
 	print_info(&param->info);
 }
