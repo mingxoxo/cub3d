@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 20:32:48 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/08 01:22:49 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/15 21:37:57 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,33 @@ char	**ft_free_two_array(char ***str)
 	return (0);
 }
 
+static void	ft_free_img(t_img *img)
+{
+	if (!img)
+		return ;
+	if (img->path)
+		free(img->path);
+}
+
+static void	ft_free_color(t_color *color)
+{
+	if (!color)
+		return ;
+	if (color->info)
+		free(color->info);
+}
+
 void	ft_free_param(t_param *param)
 {
 	if (!param)
 		return ;
 	if (param->map.arr)
 		ft_free_two_array(&(param->map.arr));
+	ft_free_img(&(param->info.no));
+	ft_free_img(&(param->info.so));
+	ft_free_img(&(param->info.we));
+	ft_free_img(&(param->info.ea));
+	ft_free_color(&(param->info.f));
+	ft_free_color(&(param->info.c));
 	return ;
 }
