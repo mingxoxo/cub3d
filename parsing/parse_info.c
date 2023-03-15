@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:53:42 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/14 23:04:34 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/15 20:08:25 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ static int	parse_color(t_info *info, char **split)
 	char	**path;
 
 	path = NULL;
-	if (ft_strcmp(split[0], "F"))
+	if (ft_strcmp(split[0], "F") == 0)
 		path = &(info->f.info);
-	else if (ft_strcmp(split[0], "C"))
+	else if (ft_strcmp(split[0], "C") == 0)
 		path = &(info->c.info);
 	if (*path)
 		return (-1);
