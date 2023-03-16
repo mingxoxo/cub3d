@@ -6,36 +6,24 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 17:13:33 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/13 18:48:38 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/16 20:26:31 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include "cub3d.h"
 
-static t_list	*read_map(char *filename, t_param *param)
+static void	get_dimensions(t_map *map, t_list *lst)
 {
-	int		fd;
 	char	*line;
-	t_list	*lst;
 
-	lst = NULL;
-	fd = ft_open(filename, param);
-	while (1)
+	while (lst)
 	{
-		if (get_next_line(fd, &line) == GFAIL)
-		{
-			ft_lstclear(&lst, free);
-			ft_error_exit("get_next_line", param);
-		}
-		if (!line)
-			break ;
-		ft_lstadd_back(&lst, ft_lstnew_cub(line, lst, param));
-		param->map.height++;
-		param->map.width = ft_max(param->map.width, ft_strlen(line));
+		line = lst->content;
+		map->height++;
+		map->width = ft_max(map->width, ft_strlen(line));
+		lst = lst->next;
 	}
-	ft_close(fd, param);
-	return (lst);
 }
 
 static void	allocate_map(t_param *param, t_list *lst)
@@ -94,16 +82,6 @@ static void	cast_map(t_param *param, t_list *lst)
 }
 
 // debugging func
-// static void	print_lst(t_list *lst)
-// {
-// 	while (lst)
-// 	{
-// 		printf("%s", (char *)(lst->content));
-// 		lst = lst->next;
-// 	}
-// }
-
-// debugging func
 // static void	print_arr(char **map)
 // {
 // 	int	i;
@@ -118,17 +96,14 @@ static void	cast_map(t_param *param, t_list *lst)
 // 	}
 // }
 
-char	**parse_map(char *filename, t_param *param)
+void	parse_map(t_list *lst, t_param *param)
 {
-	char	**arr;
-	t_list	*lst;
-
-	arr = NULL;
-	lst = read_map(filename, param);
+	if (lst == NULL)
+		ft_error_exit("map: No map information available.", param);
+	get_dimensions(&(param->map), lst);
 	allocate_map(param, lst);
 	cast_map(param, lst);
 	check_map(param, lst);
 	cast_map(param, lst);
 	ft_lstclear(&lst, free);
-	return (arr);
 }

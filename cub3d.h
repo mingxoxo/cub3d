@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/11 21:47:46 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/16 17:13:02 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@
 # define X 0
 # define Y 1
 
+# define TRUE 1
+# define FALSE 0
+
+# define ERROR -1
+# define SUCCESS 0
+# define ALLOC_FAILED 1
+
 typedef struct s_node
 {
 	int				x;
@@ -29,19 +36,34 @@ typedef struct s_node
 
 typedef struct s_img
 {
-	void	*img;
+	char	*path;
+	void	*ptr;
 	int		w;
 	int		h;
 }			t_img;
 
+typedef struct s_color
+{
+	char	*info;
+	int		r;
+	int		g;
+	int		b;
+}			t_color;
+
 typedef struct s_info
 {
-	int	sx;
-	int	sy;
+	t_img	no;
+	t_img	so;
+	t_img	we;
+	t_img	ea;
+	t_color	f;
+	t_color	c;
 }		t_info;
 
 typedef struct s_map
 {
+	int		sx;
+	int		sy;
 	int		height;
 	int		width;
 	char	**arr;
@@ -53,8 +75,13 @@ typedef struct s_param
 	t_info	info;
 }	t_param;
 
+// init
+void	init_param(t_param *param);
+
 // parsing
-char	**parse_map(char *filename, t_param *param);
+void	parse(char *filename, t_param *param);
+int		parse_info(t_list *lst, t_param *param);
+void	parse_map(t_list *lst, t_param *param);
 void	check_map(t_param *param, t_list *lst);
 
 // ft_func
