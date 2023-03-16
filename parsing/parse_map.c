@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 17:13:33 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/13 22:41:19 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/16 20:26:31 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ static void	cast_map(t_param *param, t_list *lst)
 
 void	parse_map(t_list *lst, t_param *param)
 {
+	if (lst == NULL)
+		ft_error_exit("map: No map information available.", param);
 	get_dimensions(&(param->map), lst);
 	allocate_map(param, lst);
 	cast_map(param, lst);
