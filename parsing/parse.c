@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 19:13:33 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/14 22:55:30 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/16 17:14:42 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static t_list	*divide_lst(t_list **head)
 	lst = *head;
 	while (lst)
 	{
-		if (is_element(lst->content) == FALSE)
+		if (!is_element(lst->content))
 			break ;
 		prev = lst;
 		lst = lst->next;
@@ -92,6 +92,7 @@ static void	print_lst(t_list *lst)
 
 void	parse(char *filename, t_param *param)
 {
+	int		errno;
 	t_list	*lst;
 	t_list	*map_lst;
 
@@ -99,7 +100,16 @@ void	parse(char *filename, t_param *param)
 	map_lst = divide_lst(&lst);
 	print_lst(lst);
 	print_lst(map_lst);
-	parse_info(&lst, &map_lst, param);
+	errno = parse_info(lst, param);
+	if (errno)
+	{
+		ft_lstclear(&lst, free);
+		ft_lstclear(&map_lst, free);
+		if (errno == ERROR)
+			ft_error_exit("element: 입력 형식 잘못됨", param);
+		else
+			ft_perror_exit("param_info", param);
+	}
 	ft_lstclear(&lst, free);
 	parse_map(map_lst, param);
 }

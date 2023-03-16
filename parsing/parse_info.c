@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:53:42 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/15 21:29:50 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/16 17:17:04 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ static int	parse_texture(t_info *info, char **split)
 	else if (ft_strcmp(split[0], "EA") == 0)
 		path = &(info->ea.path);
 	else
-		return (-1);
+		return (ERROR);
 	if (*path)
-		return (-1);
+		return (ERROR);
 	*path = ft_strdup(split[1]);
 	if (!(*path))
-		return (1);
-	return (0);
+		return (ALLOC_FAILED);
+	return (SUCCESS);
 }
 
 static int	parse_color(t_info *info, char **split)
@@ -45,11 +45,28 @@ static int	parse_color(t_info *info, char **split)
 	else if (ft_strcmp(split[0], "C") == 0)
 		path = &(info->c.info);
 	if (*path)
-		return (-1);
+		return (ERROR);
 	*path = ft_strdup(split[1]);
 	if (!(*path))
-		return (1);
-	return (0);
+		return (ALLOC_FAILED);
+	return (SUCCESS);
+}
+
+static int	print_info(t_info *info)
+{
+	printf("-------------------\n");
+	printf("[info]\n");
+	printf("NO: [%s]\n", info->no.path);
+	printf("SO: [%s]\n", info->so.path);
+	printf("WE: [%s]\n", info->we.path);
+	printf("EA: [%s]\n", info->ea.path);
+	printf("F: [%s]\n", info->f.info);
+	printf("C: [%s]\n", info->c.info);
+	if (!info->no.path || !info->so.path || !info->we.path || !info->ea.path)
+		return (ERROR);
+	if (!info->f.info || !info->c.info)
+		return (ERROR);
+	return (SUCCESS);
 }
 
 // debugging func
@@ -67,27 +84,13 @@ static void	print_split(char **split)
 	}
 }
 
-static void	print_info(t_info *info)
+int	parse_info(t_list *lst, t_param *param)
 {
-	printf("-------------------\n");
-	printf("[info]\n");
-	printf("NO: [%s]\n", info->no.path);
-	printf("SO: [%s]\n", info->so.path);
-	printf("WE: [%s]\n", info->we.path);
-	printf("EA: [%s]\n", info->ea.path);
-	printf("F: [%s]\n", info->f.info);
-	printf("C: [%s]\n", info->c.info);
-}
-
-void	parse_info(t_list **head, t_list **map_lst, t_param *param)
-{
-	t_list	*lst;
 	char	*line;
 	char	**split;
 	int		errno;
 
-	lst = *head;
-	errno = 0;
+	errno = SUCCESS;
 	while (lst)
 	{
 		line = (char *)(lst->content);
@@ -99,10 +102,8 @@ void	parse_info(t_list **head, t_list **map_lst, t_param *param)
 		print_split(split);
 		if (!split[0] || !split[1] || split[2])
 		{
-			ft_lstclear(head, free);
-			ft_lstclear(map_lst, free);
 			ft_free_two_array(&split);
-			ft_error_exit("element: 입력 형식 잘못됨", param);
+			return (ERROR);
 		}
 		if (split[0][0] == 'F' || split[0][0] == 'C')
 			errno = parse_color(&param->info, split);
@@ -110,14 +111,9 @@ void	parse_info(t_list **head, t_list **map_lst, t_param *param)
 			errno = parse_texture(&param->info, split);
 		ft_free_two_array(&split);
 		if (errno)
-		{
-			ft_lstclear(head, free);
-			ft_lstclear(map_lst, free);
-			if (errno == -1)
-				ft_error_exit("element: 입력 형식 잘못됨", param);
-			else
-				ft_perror_exit("param_info", param);
-		}
+			return (errno);
 	}
-	print_info(&param->info);
+	if (print_info(&param->info))
+		return (ERROR);
+	return (SUCCESS);
 }
