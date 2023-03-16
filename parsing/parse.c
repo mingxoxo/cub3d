@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 19:13:33 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/16 17:14:42 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/16 20:39:51 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	parse(char *filename, t_param *param)
 		ft_lstclear(&lst, free);
 		ft_lstclear(&map_lst, free);
 		if (errno == ERROR)
-			ft_error_exit("element: 입력 형식 잘못됨", param);
+			ft_error_exit("element: The input format is invalid", param);
 		else
 			ft_perror_exit("param_info", param);
 	}
