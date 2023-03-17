@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/16 17:13:02 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/17 16:03:32 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	init_param(t_param *param);
 void	parse(char *filename, t_param *param);
 int		parse_info(t_list *lst, t_param *param);
 void	parse_map(t_list *lst, t_param *param);
+int		parse_color(t_info *info);
 void	check_map(t_param *param, t_list *lst);
 
 // ft_func

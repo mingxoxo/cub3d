@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 19:13:33 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/16 20:39:51 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/17 16:15:38 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,16 @@ void	parse(char *filename, t_param *param)
 			ft_perror_exit("param_info", param);
 	}
 	ft_lstclear(&lst, free);
+	errno = parse_color(&(param->info));
+	if (errno)
+	{
+		ft_lstclear(&map_lst, free);
+		if (errno == ERROR)
+			ft_error_exit("element: The input format is invalid", param);
+		else
+			ft_perror_exit("param_color", param);
+	}
+	printf("f: r=%d g=%d b=%d", param->info.f.r, param->info.f.g, param->info.f.b);
+	printf("c: r=%d g=%d b=%d", param->info.c.r, param->info.c.g, param->info.c.b);
 	parse_map(map_lst, param);
 }
