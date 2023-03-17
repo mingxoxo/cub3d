@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_info.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:53:42 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/16 20:35:26 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/18 01:59:32 by jeongmin         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ static int	split_line(char *line, char ***tokens)
 	split = *tokens;
 	if (!split)
 		return (ALLOC_FAILED);
-	if (!split[0] || !split[1] || split[2])
+	print_split(*tokens);
+	if (!split[0] || !split[1] || (split[2] && ft_strcmp(split[2], "\n")))
 	{
 		ft_free_two_array(tokens);
 		return (ERROR);
@@ -107,7 +108,6 @@ int	parse_info(t_list *lst, t_param *param)
 		errno = split_line(line, &tokens);
 		if (errno)
 			return (errno);
-		print_split(tokens);
 		errno = parse_detail(&param->info, tokens);
 		ft_free_two_array(&tokens);
 		if (errno)
