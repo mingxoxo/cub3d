@@ -133,6 +133,6 @@ void	check_map(t_param *param, t_list *lst)
 		error_msg = "map: The map must be closed/surrounded by walls.";
 		if (errno == -1)
 			ft_error_exit(error_msg, param);
-		ft_perror_exit("check_path", param);
+		ft_perror_exit("param: map", param);
 	}
 }

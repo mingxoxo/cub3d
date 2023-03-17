@@ -45,9 +45,7 @@ typedef struct s_img
 typedef struct s_color
 {
 	char	*info;
-	int		r;
-	int		g;
-	int		b;
+	int		rgb[3];
 }			t_color;
 
 typedef struct s_info

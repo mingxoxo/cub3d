@@ -59,8 +59,8 @@ static int	is_element(char *line)
 
 static t_list	*divide_lst(t_list **head)
 {
-	t_list	*lst;
 	t_list	*prev;
+	t_list	*lst;
 
 	prev = NULL;
 	lst = *head;
@@ -79,48 +79,41 @@ static t_list	*divide_lst(t_list **head)
 }
 
 // debugging func
-static void	print_lst(t_list *lst)
+// static void	print_lst(t_list *lst)
+// {
+// 	printf("-------------------------\n");
+// 	while (lst)
+// 	{
+// 		printf("%s", (char *)(lst->content));
+// 		lst = lst->next;
+// 	}
+// 	printf("\n");
+// }
+
+static void	check_error(int errno, t_list *lst[2], t_param *param)
 {
-	printf("-------------------------\n");
-	while (lst)
-	{
-		printf("%s", (char *)(lst->content));
-		lst = lst->next;
-	}
-	printf("\n");
+	if (!errno)
+		return ;
+	ft_lstclear(&(lst[0]), free);
+	ft_lstclear(&(lst[1]), free);
+	if (errno == ERROR)
+		ft_error_exit("element: The input format is invalid", param);
+	else
+		ft_perror_exit("param: element", param);
 }
 
 void	parse(char *filename, t_param *param)
 {
 	int		errno;
-	t_list	*lst;
-	t_list	*map_lst;
+	t_list	*lst[2];
 
-	lst = read_file(filename, param);
-	map_lst = divide_lst(&lst);
-	print_lst(lst);
-	print_lst(map_lst);
-	errno = parse_info(lst, param);
-	if (errno)
-	{
-		ft_lstclear(&lst, free);
-		ft_lstclear(&map_lst, free);
-		if (errno == ERROR)
-			ft_error_exit("element: The input format is invalid", param);
-		else
-			ft_perror_exit("param_info", param);
-	}
-	ft_lstclear(&lst, free);
+	lst[0] = read_file(filename, param);
+	lst[1] = divide_lst(lst);
+	// print_lst(lst[0]);
+	// print_lst(lst[1]);
+	errno = parse_info(lst[0], param);
+	check_error(errno, lst, param);
 	errno = parse_color(&(param->info));
-	if (errno)
-	{
-		ft_lstclear(&map_lst, free);
-		if (errno == ERROR)
-			ft_error_exit("element: The input format is invalid", param);
-		else
-			ft_perror_exit("param_color", param);
-	}
-	printf("f: r=%d g=%d b=%d", param->info.f.r, param->info.f.g, param->info.f.b);
-	printf("c: r=%d g=%d b=%d", param->info.c.r, param->info.c.g, param->info.c.b);
-	parse_map(map_lst, param);
+	check_error(errno, lst, param);
+	parse_map(lst[1], param);
 }

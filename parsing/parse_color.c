@@ -31,42 +31,50 @@ static int	str_to_int(char *str, int *n)
 	return (SUCCESS);
 }
 
+static int	error_handler(int errno, char ***split)
+{
+	ft_free_two_array(split);
+	return (errno);
+}
+
 static int	parse_rgb(t_color *color)
 {
 	int		i;
-	int		rgb[3];
 	int		errno;
 	char	**split;
-	
+
 	split = ft_split(color->info, ',');
 	if (!split)
 		return (ALLOC_FAILED);
 	if (!split[0] || !split[1] || !split[2] || split[3])
-	{
-		ft_free_two_array(&split);
-		return (ERROR);
-	}
+		return (error_handler(ERROR, &split));
 	i = 0;
 	while (i < 3)
 	{
-		errno = str_to_int(split[i], rgb + i);
+		errno = str_to_int(split[i], color->rgb + i);
 		if (errno)
-		{
-			ft_free_two_array(&split);
-			return (errno);
-		}
-		if (rgb[i] < 0 || 255 < rgb[i])
-		{
-			ft_free_two_array(&split);
-			return (ERROR);
-		}
+			return (error_handler(errno, &split));
+		if (color->rgb[i] < 0 || 255 < color->rgb[i])
+			return (error_handler(ERROR, &split));
 		i++;
 	}
-	color->r = rgb[0];
-	color->g = rgb[1];
-	color->b = rgb[2];
 	ft_free_two_array(&split);
 	return (SUCCESS);
+}
+
+// debugging func
+static void	print_color(t_color *color, char *name)
+{
+	int	i;
+
+	i = 0;
+	printf("-------------------------\n");
+	printf("[%s]\n", name);
+	while (i < 3)
+	{
+		printf("(%d)\n", color->rgb[i]);
+		i++;
+	}
 }
 
 int	parse_color(t_info *info)
@@ -74,8 +82,10 @@ int	parse_color(t_info *info)
 	int	errno;
 
 	errno = parse_rgb(&(info->f));
+	print_color(&(info->f), "F");
 	if (errno)
 		return (errno);
 	errno = parse_rgb(&(info->c));
+	print_color(&(info->c), "C");
 	return (errno);
 }

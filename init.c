@@ -22,10 +22,15 @@ static void	init_img(t_img *img)
 
 static void	init_color(t_color *color)
 {
+	int	i;
+
+	i = 0;
+	while (i < 3)
+	{
+		color->rgb[i] = 0;
+		i++;
+	}
 	color->info = NULL;
-	color->r = 0;
-	color->g = 0;
-	color->b = 0;
 }
 
 static void	init_map(t_map *map)
