@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 19:13:33 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/17 16:15:38 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/18 01:48:07 by jeongmin         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,6 @@ void	parse(char *filename, t_param *param)
 	check_error(errno, lst, param);
 	errno = parse_color(&(param->info));
 	check_error(errno, lst, param);
+	ft_lstclear(&(lst[0]), free);
 	parse_map(lst[1], param);
 }
