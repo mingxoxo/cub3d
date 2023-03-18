@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/18 21:37:01 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/19 01:37:56 by jeongmin         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdio.h>
 # include "libft.h"
-# include "mlx.h"
+# include "mlx_opengl/mlx.h"
 
 # define X 0
 # define Y 1
@@ -26,6 +26,8 @@
 # define ERROR -1
 # define SUCCESS 0
 # define ALLOC_FAILED 1
+
+# define KEY_ESC	53
 
 typedef struct s_node
 {
@@ -76,8 +78,14 @@ typedef struct s_param
 	t_info	info;
 }	t_param;
 
+
+int		exit_game(t_param *param);
+
 // init
 void	init_param(t_param *param);
+
+// key_press.c
+int		key_press(int key, t_param *param);
 
 // parsing
 void	parse(char *filename, t_param *param);
