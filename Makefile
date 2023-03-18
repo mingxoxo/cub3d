@@ -6,7 +6,11 @@
 #    By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/04 21:52:18 by wonyang           #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2023/03/17 15:56:44 by wonyang          ###   ########seoul.kr   #
+=======
+#    Updated: 2023/03/17 19:19:05 by wonyang          ###   ########seoul.kr   #
+>>>>>>> abe2268ebd65bc3f3518f169033fca013c74eb2a
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +23,13 @@ LIBFT_LIB	= $(LIBFT)/libft.a
 GNL		   = get_next_line
 GNL_HEADER = get_next_line.h
 
+MLX		   = mlx_opengl
+
 HEADERS		= -I$(LIBFT) \
 			  -I$(GNL) \
 			  -I./
 
-LIBS		= -lft -L$(LIBFT)
+LIBS		= -lft -L$(LIBFT) -Lmlx_opengl -lmlx -framework OpenGL -framework Appkit
 
 CFLAGS		= -Wall -Werror -Wextra
 
@@ -70,6 +76,7 @@ OBJS		= $(SRCS:%.c=%.o) \
 
 # define compile commands
 $(NAME) : 	$(OBJS) $(LIBFT_LIB)
+			@make -C $(MLX)
 			cc $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
 
 all	:		$(NAME)
@@ -83,6 +90,7 @@ $(LIBFT_LIB):
 clean	:
 			rm -f $(OBJS)
 			make clean -C $(LIBFT)
+			make clean -C $(MLX)
 
 fclean	:	
 			make clean
