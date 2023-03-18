@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/19 01:37:56 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/19 01:55:44 by jeongmin         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ typedef struct s_param
 	t_map	map;
 	t_info	info;
 }	t_param;
-
 
 int		exit_game(t_param *param);
 
