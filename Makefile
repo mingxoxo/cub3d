@@ -3,14 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+         #
+#    By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/04 21:52:18 by wonyang           #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2023/03/17 15:56:44 by wonyang          ###   ########seoul.kr   #
-=======
-#    Updated: 2023/03/17 19:19:05 by wonyang          ###   ########seoul.kr   #
->>>>>>> abe2268ebd65bc3f3518f169033fca013c74eb2a
+#    Updated: 2023/03/18 16:14:09 by jeongmin         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
