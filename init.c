@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:27:07 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/14 23:02:12 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/18 18:11:27 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static void	init_map(t_map *map)
 
 void	init_param(t_param *param)
 {
+	param->mlx = NULL;
+	param->win = NULL;
 	init_img(&(param->info.no));
 	init_img(&(param->info.so));
 	init_img(&(param->info.we));
