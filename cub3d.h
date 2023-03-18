@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/18 18:15:49 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/18 21:37:01 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int		parse_info(t_list *lst, t_param *param);
 void	parse_map(t_list *lst, t_param *param);
 int		parse_color(t_info *info);
 void	check_map(t_param *param, t_list *lst);
+void	get_image(t_param *param);
 
 // ft_func
 int		ft_open(const char *path, t_param *param);
