@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/19 20:11:37 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/19 20:32:28 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,19 @@
 # define SUCCESS 0
 # define ALLOC_FAILED 1
 
-# define KEY_ESC	53
-
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
+
+enum	e_keycode
+{
+	KEY_ESC = 53,
+	KEY_W = 13,
+	KEY_A = 0,
+	KEY_S = 1,
+	KEY_D = 2,
+	KEY_LEFT = 123,
+	KEY_RIGHT = 124
+};
 
 typedef struct s_node
 {
@@ -73,12 +82,23 @@ typedef struct s_map
 	char	**arr;
 }			t_map;
 
+typedef struct s_ray
+{
+	double	posX;
+	double	posY;
+	double	dirX;
+	double	dirY;
+	double	planeX;
+	double	planeY;
+}	t_ray;
+
 typedef struct s_param
 {
 	void	*mlx;
 	void	*win;
 	t_map	map;
 	t_info	info;
+	t_ray	ray;
 }	t_param;
 
 int		exit_game(t_param *param);
@@ -96,6 +116,9 @@ void	parse_map(t_list *lst, t_param *param);
 int		parse_color(t_info *info);
 void	check_map(t_param *param, t_list *lst);
 void	get_image(t_param *param);
+
+// render
+void	init_ray(t_param *param);
 
 // ft_func
 int		ft_open(const char *path, t_param *param);

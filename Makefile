@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/04 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/03/19 01:27:34 by jeongmin         ###   ########seoul.kr   #
+#    Updated: 2023/03/19 20:31:41 by wonyang          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,8 @@ GNL_SRCS	= $(addprefix $(GNL_DIR), $(_GNL_SRCS))
 # main source files
 SRCS		= main.c \
 			  init.c \
-			  key_press.c
+			  key_press.c \
+			  render/init.c
 
 OBJS		= $(SRCS:%.c=%.o) \
 			  $(PARSING_SRCS:%.c=%.o) \

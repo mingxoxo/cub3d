@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 20:35:05 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/19 01:45:01 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/19 20:30:27 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	main(int argc, char **argv)
 	check_arg(argc, argv);
 	init_param(&param);
 	parse(argv[1], &param);
+	init_ray(&param);
 	put_images(&param);
 	mlx_hook(param.win, 2, 0, key_press, &param);
 	mlx_hook(param.win, 17, 0, exit_game, &param);
