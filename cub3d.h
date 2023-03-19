@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/17 16:03:32 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/19 01:55:44 by jeongmin         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdio.h>
 # include "libft.h"
+# include "mlx_opengl/mlx.h"
 
 # define X 0
 # define Y 1
@@ -25,6 +26,8 @@
 # define ERROR -1
 # define SUCCESS 0
 # define ALLOC_FAILED 1
+
+# define KEY_ESC	53
 
 typedef struct s_node
 {
@@ -69,12 +72,19 @@ typedef struct s_map
 
 typedef struct s_param
 {
+	void	*mlx;
+	void	*win;
 	t_map	map;
 	t_info	info;
 }	t_param;
 
+int		exit_game(t_param *param);
+
 // init
 void	init_param(t_param *param);
+
+// key_press.c
+int		key_press(int key, t_param *param);
 
 // parsing
 void	parse(char *filename, t_param *param);
@@ -82,6 +92,7 @@ int		parse_info(t_list *lst, t_param *param);
 void	parse_map(t_list *lst, t_param *param);
 int		parse_color(t_info *info);
 void	check_map(t_param *param, t_list *lst);
+void	get_image(t_param *param);
 
 // ft_func
 int		ft_open(const char *path, t_param *param);

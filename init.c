@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:27:07 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/14 23:02:12 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/19 01:44:07 by jeongmin         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,18 @@ static void	init_map(t_map *map)
 	map->arr = NULL;
 }
 
+static void	init_mlx(t_param *param)
+{
+	param->mlx = NULL;
+	param->win = NULL;
+	param->mlx = mlx_init();
+	if (!(param->mlx))
+		ft_error_exit("mlx: mlx_ptr error\n", param);
+	param->win = mlx_new_window(param->mlx, 1600, 400, "cub3d");
+	if (!(param->win))
+		ft_error_exit("mlx: win_ptr error\n", param);
+}
+
 void	init_param(t_param *param)
 {
 	init_img(&(param->info.no));
@@ -51,4 +63,5 @@ void	init_param(t_param *param)
 	init_color(&(param->info.f));
 	init_color(&(param->info.c));
 	init_map(&param->map);
+	init_mlx(param);
 }
