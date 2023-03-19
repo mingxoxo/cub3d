@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:27:07 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/19 01:44:07 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/19 20:11:33 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	init_mlx(t_param *param)
 	param->mlx = mlx_init();
 	if (!(param->mlx))
 		ft_error_exit("mlx: mlx_ptr error\n", param);
-	param->win = mlx_new_window(param->mlx, 1600, 400, "cub3d");
+	param->win = mlx_new_window(param->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
 	if (!(param->win))
 		ft_error_exit("mlx: win_ptr error\n", param);
 }
