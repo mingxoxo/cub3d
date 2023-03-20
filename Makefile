@@ -6,7 +6,7 @@
 #    By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/04 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/03/19 20:31:41 by wonyang          ###   ########seoul.kr   #
+#    Updated: 2023/03/20 18:42:57 by wonyang          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,13 @@ _PARSING_SRCS	= parse.c \
 
 PARSING_SRCS	= $(addprefix $(PARSING_DIR), $(_PARSING_SRCS))
 
+# render part source files
+RENDER_DIR		= render/
+
+_RENDER_SRCS	= init.c
+
+RENDER_SRCS	= $(addprefix $(RENDER_DIR), $(_RENDER_SRCS))
+
 #ft_func source files
 FUNC_DIR		= ft_func/
 
@@ -65,11 +72,11 @@ GNL_SRCS	= $(addprefix $(GNL_DIR), $(_GNL_SRCS))
 # main source files
 SRCS		= main.c \
 			  init.c \
-			  key_press.c \
-			  render/init.c
+			  key_press.c
 
 OBJS		= $(SRCS:%.c=%.o) \
 			  $(PARSING_SRCS:%.c=%.o) \
+			  $(RENDER_SRCS:%.c=%.o) \
 			  $(FUNC_SRCS:%.c=%.o) \
 			  $(GNL_SRCS:%.c=%.o)
 
