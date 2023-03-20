@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/20 19:20:09 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/20 22:03:31 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,17 @@ typedef struct s_map
 	char	**arr;
 }			t_map;
 
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*win;
+	void	*img;
+	int		bit;
+	int		lsize;
+	int		end;
+	char	*ptr;
+}			t_mlx;
+
 typedef struct s_ray
 {
 	double	pos_x;
@@ -90,16 +101,24 @@ typedef struct s_ray
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
-}	t_ray;
+}			t_ray;
+
+typedef struct s_dda
+{
+	double	ray_dir[2];
+	int		map[2];
+	double	side_dst[2];
+	double	delta_dst[2];
+	int		step[2];
+}			t_dda;
 
 typedef struct s_param
 {
-	void	*mlx;
-	void	*win;
+	t_mlx	mlx;
 	t_map	map;
 	t_info	info;
 	t_ray	ray;
-}	t_param;
+}			t_param;
 
 int		exit_game(t_param *param);
 
@@ -119,6 +138,9 @@ void	get_image(t_param *param);
 
 // render
 void	init_ray(t_param *param);
+void	print_line(t_mlx mlx, int x, int draw[2], char *color);
+void	fill_background(t_mlx mlx);
+void	render_screen(t_param *param);
 
 // ft_func
 int		ft_open(const char *path, t_param *param);

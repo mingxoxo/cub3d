@@ -6,7 +6,7 @@
 #    By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/04 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/03/20 18:42:57 by wonyang          ###   ########seoul.kr   #
+#    Updated: 2023/03/20 22:06:09 by wonyang          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ HEADERS		= -I$(LIBFT) \
 
 LIBS		= -lft -L$(LIBFT) -Lmlx_opengl -lmlx -framework OpenGL -framework Appkit
 
-CFLAGS		= -Wall -Werror -Wextra
+CFLAGS		= -fsanitize=address -g #-Wall -Werror -Wextra
 
 
 # parsing part source files
@@ -46,7 +46,9 @@ PARSING_SRCS	= $(addprefix $(PARSING_DIR), $(_PARSING_SRCS))
 # render part source files
 RENDER_DIR		= render/
 
-_RENDER_SRCS	= init.c
+_RENDER_SRCS	= init.c \
+				  render.c \
+				  screen.c
 
 RENDER_SRCS	= $(addprefix $(RENDER_DIR), $(_RENDER_SRCS))
 
