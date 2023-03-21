@@ -6,21 +6,21 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:13:11 by wonyang           #+#    #+#             */
-/*   Updated: 2023/03/20 23:05:44 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/21 18:48:42 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "cub3d.h"
 
-void debug_dda(t_dda *dda)
-{
-    printf("ray_dir: (%f, %f), ", dda->ray_dir[0], dda->ray_dir[1]);
-    printf("map: (%d, %d), ", dda->map[0], dda->map[1]);
-    printf("side_dst: (%f, %f), ", dda->side_dst[0], dda->side_dst[1]);
-    printf("delta_dst: (%f, %f), ", dda->delta_dst[0], dda->delta_dst[1]);
-    printf("step: (%d, %d) ", dda->step[0], dda->step[1]);
-}
+// void debug_dda(t_dda *dda)
+// {
+//     printf("ray_dir: (%f, %f), ", dda->ray_dir[0], dda->ray_dir[1]);
+//     printf("map: (%d, %d), ", dda->map[0], dda->map[1]);
+//     printf("side_dst: (%f, %f), ", dda->side_dst[0], dda->side_dst[1]);
+//     printf("delta_dst: (%f, %f), ", dda->delta_dst[0], dda->delta_dst[1]);
+//     printf("step: (%d, %d) ", dda->step[0], dda->step[1]);
+// }
 
 static void	set_dda(t_ray ray, t_dda *dda)
 {
@@ -76,8 +76,6 @@ static double	get_wall_dst(t_param *p, t_dda *d)
 		x_dst = d->map[X] - p->ray.pos_x + (1 - d->step[X]) / 2;
 		return (x_dst / d->ray_dir[X]);
 	}
-	printf("pos_y: %lf, ", p->ray.pos_y);
-	debug_dda(d);
 	return ((d->map[Y] - p->ray.pos_y + (1 - d->step[Y]) / 2) / d->ray_dir[Y]);
 }
 
@@ -95,7 +93,7 @@ static void	draw_line(t_param *param, t_dda dda, double wall_dst, int x)
 		draw[1] = WIN_HEIGHT - 1;
 
 	//벽 색깔 선택
-	char *color = NULL;
+	char *color = "0x814202";
 	// switch(param->map.arr[dda.map[X]][dda.map[Y]])
 	// {
 	// 	case 1:  color = "0x810202";  break; //red
