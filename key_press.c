@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 20:35:05 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/21 19:29:10 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/23 19:33:55 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	move_front(t_param *param, const double move_speed)
 
 	ray = &(param->ray);
 	map = param->map.arr;
-	if(map[(int)(ray->pos_x + ray->dir_x * move_speed)][(int)(ray->pos_y)] == '0')
+	if (map[(int)(ray->pos_x + ray->dir_x * move_speed)][(int)(ray->pos_y)] == '0')
 		ray->pos_x += ray->dir_x * move_speed;
-	if(map[(int)(ray->pos_x)][(int)(ray->pos_y + ray->dir_y * move_speed)] == '0')
+	if (map[(int)(ray->pos_x)][(int)(ray->pos_y + ray->dir_y * move_speed)] == '0')
 		ray->pos_y += ray->dir_y * move_speed;
 }
 
@@ -33,9 +33,9 @@ void	move_back(t_param *param, const double move_speed)
 
 	ray = &(param->ray);
 	map = param->map.arr;
-	if(map[(int)(ray->pos_x - ray->dir_x * move_speed)][(int)(ray->pos_y)] == '0')
+	if (map[(int)(ray->pos_x - ray->dir_x * move_speed)][(int)(ray->pos_y)] == '0')
 		ray->pos_x -= ray->dir_x * move_speed;
-	if(map[(int)(ray->pos_x)][(int)(ray->pos_y - ray->dir_y * move_speed)] == '0')
+	if (map[(int)(ray->pos_x)][(int)(ray->pos_y - ray->dir_y * move_speed)] == '0')
 		ray->pos_y -= ray->dir_y * move_speed;
 }
 
@@ -77,5 +77,6 @@ int	key_press(int key, t_param *param)
 	else if (key == KEY_LEFT)
 		rotate_left(&(param->ray), rot_speed);
 	render_screen(param);
+	printf("x: %lf, y: %lf\n", param->ray.pos_x, param->ray.pos_y);
 	return (0);
 }
