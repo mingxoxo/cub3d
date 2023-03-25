@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 20:35:05 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 01:27:44 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 03:33:53 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,20 @@ int	exit_game(t_param *param)
 	exit(0);
 }
 
+int	key_release(int key, t_param *param)
+{
+	if (0 <= key && key < 256)
+		param->key[key] = 0;
+	return (0);
+}
+
+int	key_press(int key, t_param *param)
+{
+	if (0 <= key && key < 256)
+		param->key[key] = 1;
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_param	param;
@@ -38,8 +52,9 @@ int	main(int argc, char **argv)
 	parse(argv[1], &param);
 	init_ray(&param);
 	render_screen(&param);
+	mlx_key_hook(param.mlx.win, key_release, &param);
 	mlx_hook(param.mlx.win, 2, 0, key_press, &param);
-	mlx_hook(param.mlx.win, 17, 0, exit_game, &param);
+	mlx_loop_hook(param.mlx.mlx, loop, &param);
 	mlx_loop(param.mlx.mlx);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 02:15:47 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 03:37:13 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ typedef struct s_param
 	t_map	map;
 	t_info	info;
 	t_ray	ray;
+	int		key[256];
 }			t_param;
 
 int		exit_game(t_param *param);
@@ -137,7 +138,7 @@ int		exit_game(t_param *param);
 void	init_param(t_param *param);
 
 // key_press.c
-int		key_press(int key, t_param *param);
+int		loop(t_param *param);
 
 // parsing
 void	parse(char *filename, t_param *param);

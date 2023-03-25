@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:27:07 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 01:26:35 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 02:54:29 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,11 @@ static void	init_mlx(t_param *param)
 
 void	init_param(t_param *param)
 {
+	int	i;
+
+	i = 0;
+	while (i < 256)
+		param->key[i++] = 0;
 	init_img(&(param->info.no));
 	init_img(&(param->info.so));
 	init_img(&(param->info.we));
