@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/20 22:03:31 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/25 16:36:27 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,12 @@ typedef struct s_node
 typedef struct s_img
 {
 	char	*path;
-	void	*ptr;
+	char	*data;
 	int		w;
 	int		h;
+	int		bpp;
+	int		lsize;
+	int		end;
 }			t_img;
 
 typedef struct s_color
