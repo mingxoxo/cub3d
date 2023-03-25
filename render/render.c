@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:13:11 by wonyang           #+#    #+#             */
-/*   Updated: 2023/03/26 02:15:32 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 04:26:46 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	render_screen(t_param *param)
 		draw_line(param, &dda, x);
 		x++;
 	}
+	draw_minimap(param);
 	mlx_put_image_to_window(param->mlx.mlx, param->mlx.win, \
 													param->mlx.img, 0, 0);
 }

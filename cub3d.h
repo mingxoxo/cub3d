@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 03:37:13 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 04:26:25 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@
 # define ERROR -1
 # define SUCCESS 0
 # define ALLOC_FAILED 1
+
+# define MAX_W 25
+# define MAX_H 25
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
@@ -173,5 +176,8 @@ int		init_queue(t_node **queue, int sx, int sy);
 void	ft_free_queue(t_node **queue);
 int		enqueue(t_node *head, int x, int y);
 void	dequeue(t_node *head, int cor[2]);
+
+// minimap.c
+void	draw_minimap(t_param *param);
 
 #endif

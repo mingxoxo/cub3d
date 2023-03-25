@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+         #
+#    By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/04 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/03/26 03:41:02 by wonyang          ###   ########seoul.kr   #
+#    Updated: 2023/03/26 04:26:33 by jeongmin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,12 @@ _FUNC_SRCS	= error_exit.c \
 
 FUNC_SRCS	= $(addprefix $(FUNC_DIR), $(_FUNC_SRCS))
 
+MINIMAP_DIR		= minimap/
+
+_MINIMAP_SRCS	= minimap.c
+
+MINIMAP_SRCS	= $(addprefix $(MINIMAP_DIR), $(_MINIMAP_SRCS))
+
 #ft_func source files
 GNL_DIR		= $(GNL)/
 
@@ -81,6 +87,7 @@ OBJS		= $(SRCS:%.c=%.o) \
 			  $(PARSING_SRCS:%.c=%.o) \
 			  $(RENDER_SRCS:%.c=%.o) \
 			  $(FUNC_SRCS:%.c=%.o) \
+			  $(MINIMAP_SRCS:%.c=%.o) \
 			  $(GNL_SRCS:%.c=%.o)
 
 # define compile commands
