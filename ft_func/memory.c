@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 20:32:48 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/18 21:10:39 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/25 17:34:22 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ void	ft_free_param(t_param *param)
 		return ;
 	if (param->map.arr)
 		ft_free_two_array(&(param->map.arr));
-	ft_free_img(&(param->info.no), param->mlx);
-	ft_free_img(&(param->info.so), param->mlx);
-	ft_free_img(&(param->info.we), param->mlx);
-	ft_free_img(&(param->info.ea), param->mlx);
+	ft_free_img(&(param->info.no), param->mlx.mlx);
+	ft_free_img(&(param->info.so), param->mlx.mlx);
+	ft_free_img(&(param->info.we), param->mlx.mlx);
+	ft_free_img(&(param->info.ea), param->mlx.mlx);
 	ft_free_color(&(param->info.f));
 	ft_free_color(&(param->info.c));
-	if (param->mlx && param->win)
-		mlx_destroy_window(param->mlx, param->win);
+	if (param->mlx.mlx && param->mlx.win)
+		mlx_destroy_window(param->mlx.mlx, param->mlx.win);
 	return ;
 }

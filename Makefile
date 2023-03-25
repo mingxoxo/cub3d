@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/04 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/03/19 01:27:34 by jeongmin         ###   ########seoul.kr   #
+#    Updated: 2023/03/26 01:22:27 by wonyang          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,15 @@ _PARSING_SRCS	= parse.c \
 
 PARSING_SRCS	= $(addprefix $(PARSING_DIR), $(_PARSING_SRCS))
 
+# render part source files
+RENDER_DIR		= render/
+
+_RENDER_SRCS	= init.c \
+				  render.c \
+				  screen.c
+
+RENDER_SRCS	= $(addprefix $(RENDER_DIR), $(_RENDER_SRCS))
+
 #ft_func source files
 FUNC_DIR		= ft_func/
 
@@ -69,6 +78,7 @@ SRCS		= main.c \
 
 OBJS		= $(SRCS:%.c=%.o) \
 			  $(PARSING_SRCS:%.c=%.o) \
+			  $(RENDER_SRCS:%.c=%.o) \
 			  $(FUNC_SRCS:%.c=%.o) \
 			  $(GNL_SRCS:%.c=%.o)
 

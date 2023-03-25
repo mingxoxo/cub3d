@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 20:35:05 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/19 01:45:01 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 01:27:44 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,6 @@ int	exit_game(t_param *param)
 	exit(0);
 }
 
-static void	put_images(t_param *param)
-{
-	mlx_put_image_to_window(param->mlx, param->win, \
-			param->info.ea.ptr, 0, 0);
-	mlx_put_image_to_window(param->mlx, param->win, \
-			param->info.we.ptr, 400, 0);
-	mlx_put_image_to_window(param->mlx, param->win, \
-			param->info.so.ptr, 800, 0);
-	mlx_put_image_to_window(param->mlx, param->win, \
-			param->info.no.ptr, 1200, 0);
-}
-
 int	main(int argc, char **argv)
 {
 	t_param	param;
@@ -48,9 +36,10 @@ int	main(int argc, char **argv)
 	check_arg(argc, argv);
 	init_param(&param);
 	parse(argv[1], &param);
-	put_images(&param);
-	mlx_hook(param.win, 2, 0, key_press, &param);
-	mlx_hook(param.win, 17, 0, exit_game, &param);
-	mlx_loop(param.mlx);
+	init_ray(&param);
+	render_screen(&param);
+	mlx_hook(param.mlx.win, 2, 0, key_press, &param);
+	mlx_hook(param.mlx.win, 17, 0, exit_game, &param);
+	mlx_loop(param.mlx.mlx);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:27:07 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/25 23:56:07 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/26 01:26:35 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 static void	init_img(t_img *img)
 {
-	img->path = NULL;
 	img->ptr = NULL;
+	img->path = NULL;
+	img->data = NULL;
 	img->w = 0;
 	img->h = 0;
+	img->lsize = 0;
+	img->bpp = 0;
+	img->end = 0;
 }
 
 static void	init_color(t_color *color)
@@ -45,14 +49,25 @@ static void	init_map(t_map *map)
 
 static void	init_mlx(t_param *param)
 {
-	param->mlx = NULL;
-	param->win = NULL;
-	param->mlx = mlx_init();
-	if (!(param->mlx))
+	t_mlx	*mlx;
+
+	mlx = &(param->mlx);
+	mlx->mlx = NULL;
+	mlx->win = NULL;
+	mlx->mlx = mlx_init();
+	if (!(mlx->mlx))
 		ft_error_exit("mlx: mlx_ptr error\n", param);
-	param->win = mlx_new_window(param->mlx, 1600, 400, "cub3d");
-	if (!(param->win))
+	mlx->win = mlx_new_window(mlx->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
+	if (!(mlx->win))
 		ft_error_exit("mlx: win_ptr error\n", param);
+	mlx->img = mlx_new_image(mlx->mlx, WIN_WIDTH, WIN_HEIGHT);
+	mlx->bit = 0;
+	mlx->lsize = 0;
+	mlx->end = 0;
+	mlx->ptr = mlx_get_data_addr(mlx->img, &(mlx->bit), \
+											&(mlx->lsize), &(mlx->end));
+	if (!(mlx->ptr))
+		ft_error_exit("mlx: ptr error\n", param);
 }
 
 void	init_param(t_param *param)

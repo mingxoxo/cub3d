@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/25 23:56:09 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/26 01:25:14 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,19 @@
 # define SUCCESS 0
 # define ALLOC_FAILED 1
 
-# define KEY_ESC	53
+# define WIN_WIDTH 1280
+# define WIN_HEIGHT 720
+
+enum	e_keycode
+{
+	KEY_ESC = 53,
+	KEY_W = 13,
+	KEY_A = 0,
+	KEY_S = 1,
+	KEY_D = 2,
+	KEY_LEFT = 123,
+	KEY_RIGHT = 124
+};
 
 typedef struct s_node
 {
@@ -39,10 +51,14 @@ typedef struct s_node
 
 typedef struct s_img
 {
-	char	*path;
 	void	*ptr;
+	char	*path;
+	char	*data;
 	int		w;
 	int		h;
+	int		bpp;
+	int		lsize;
+	int		end;
 }			t_img;
 
 typedef struct s_color
@@ -71,13 +87,45 @@ typedef struct s_map
 	char	**arr;
 }			t_map;
 
-typedef struct s_param
+typedef struct s_mlx
 {
 	void	*mlx;
 	void	*win;
+	void	*img;
+	int		bit;
+	int		lsize;
+	int		end;
+	char	*ptr;
+}			t_mlx;
+
+typedef struct s_ray
+{
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+}			t_ray;
+
+typedef struct s_dda
+{
+	double	ray_dir[2];
+	int		map[2];
+	double	side_dst[2];
+	double	delta_dst[2];
+	int		step[2];
+	double	w_dst;
+	int		side;
+}			t_dda;
+
+typedef struct s_param
+{
+	t_mlx	mlx;
 	t_map	map;
 	t_info	info;
-}	t_param;
+	t_ray	ray;
+}			t_param;
 
 int		exit_game(t_param *param);
 
@@ -94,6 +142,12 @@ void	parse_map(t_list *lst, t_param *param);
 int		parse_color(t_info *info);
 void	check_map(t_param *param, t_list *lst);
 void	get_image(t_param *param);
+
+// render
+void	init_ray(t_param *param);
+void	print_dot(t_mlx mlx, int x, int y, int color);
+void	fill_background(t_mlx mlx, int c1[3], int c2[3]);
+void	render_screen(t_param *param);
 
 // ft_func
 int		ft_open(const char *path, t_param *param);

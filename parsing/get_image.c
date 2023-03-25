@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_image.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:45:15 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/18 22:28:24 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/25 17:35:13 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 void	file_to_image(t_img *img, t_param *param)
 {
-	img->ptr = mlx_xpm_file_to_image(param->mlx, img->path, \
+	img->ptr = mlx_xpm_file_to_image(param->mlx.mlx, img->path, \
 									&(img->w), &(img->h));
 	if (img->ptr == NULL)
+		ft_perror_exit("mlx: img load error", param);
+	img->data = mlx_get_data_addr(img->ptr, &img->bpp, &img->lsize, &img->end);
+	if (img->data == NULL)
 		ft_perror_exit("mlx: img load error", param);
 }
 
