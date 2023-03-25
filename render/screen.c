@@ -6,36 +6,15 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 20:25:46 by wonyang           #+#    #+#             */
-/*   Updated: 2023/03/25 17:01:01 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/25 18:50:29 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	create_argb(int a, int r, int g, int b)
+static int	create_argb(int a, int rgb[3])
 {
-	return (a << 24 | r << 16 | g << 8 | b);
-}
-
-static int	hex_to_int(char *hex)
-{
-	int	i;
-	int	res;
-
-	if (!hex || ft_strlen(hex) != 8)
-		return (create_argb(0, 255, 255, 255));
-	i = 2;
-	res = 0;
-	while (hex[i])
-	{
-		res <<= 4;
-		if (ft_isdigit(hex[i]))
-			res += hex[i] - '0';
-		else
-			res += ft_tolower(hex[i]) - 'a' + 10;
-		i++;
-	}
-	return (res);
+	return (a << 24 | rgb[0] << 16 | rgb[1] << 8 | rgb[2]);
 }
 
 void	print_dot(t_mlx mlx, int x, int y, int color)
@@ -48,20 +27,7 @@ void	print_dot(t_mlx mlx, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-// void	print_line(t_mlx mlx, int x, int draw[2], char *color)
-// {
-// 	int	i;
-
-// 	// printf("%d %d\n", draw[0], draw[1]);
-// 	i = draw[0];
-// 	while (i <= draw[1])
-// 	{
-// 		print_dot(mlx, x, i, color);
-// 		i++;
-// 	}
-// }
-
-void	fill_background(t_mlx mlx)
+void	fill_background(t_mlx mlx, int c1[3], int c2[3])
 {
 	char	*dst;
 	int		i;
@@ -75,9 +41,9 @@ void	fill_background(t_mlx mlx)
 		{
 			dst = mlx.ptr + (i * (mlx.lsize) + j * (mlx.bit) / 8);
 			if (i < WIN_HEIGHT / 2)
-				*(unsigned int *)dst = create_argb(0, 0, 255, 255); // sky
+				*(unsigned int *)dst = create_argb(0, c1);
 			else
-				*(unsigned int *)dst = create_argb(0, 153, 204, 0); // ground
+				*(unsigned int *)dst = create_argb(0, c2);
 			j++;
 		}
 		i++;

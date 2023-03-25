@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:13:11 by wonyang           #+#    #+#             */
-/*   Updated: 2023/03/25 18:14:58 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/25 18:45:18 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ void	render_screen(t_param *param)
 	t_dda	dda;
 	double	dst;
 
-	fill_background(param->mlx);
+	fill_background(param->mlx, param->info.f.rgb, param->info.c.rgb);
 	x = 0;
 	while (x < WIN_WIDTH)
 	{
