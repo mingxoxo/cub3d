@@ -6,7 +6,7 @@
 #    By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/04 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/03/26 01:22:27 by wonyang          ###   ########seoul.kr   #
+#    Updated: 2023/03/26 03:41:02 by wonyang          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,8 @@ RENDER_DIR		= render/
 
 _RENDER_SRCS	= init.c \
 				  render.c \
-				  screen.c
+				  screen.c \
+				  core.c
 
 RENDER_SRCS	= $(addprefix $(RENDER_DIR), $(_RENDER_SRCS))
 
