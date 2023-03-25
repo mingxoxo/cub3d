@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:45:15 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/25 16:38:24 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/25 16:41:17 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	file_to_image(t_img *img, t_param *param)
 	img->data = mlx_get_data_addr(ptr, &img->bpp, &img->lsize, &img->end);
 	if (img->data == NULL)
 		ft_perror_exit("mlx: img load error", param);
+	mlx_destroy_image(param->mlx.mlx, ptr);
 }
 
 void	get_image(t_param *param)
