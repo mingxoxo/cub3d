@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_info.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:53:42 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/18 01:59:32 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/25 23:59:38 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,34 +41,11 @@ static int	parse_detail(t_info *info, char **tokens)
 
 static int	check_all_info_exists(t_info *info)
 {
-	printf("-------------------\n");
-	printf("[info]\n");
-	printf("NO: [%s]\n", info->no.path);
-	printf("SO: [%s]\n", info->so.path);
-	printf("WE: [%s]\n", info->we.path);
-	printf("EA: [%s]\n", info->ea.path);
-	printf("F: [%s]\n", info->f.info);
-	printf("C: [%s]\n", info->c.info);
 	if (!info->no.path || !info->so.path || !info->we.path || !info->ea.path)
 		return (ERROR);
 	if (!info->f.info || !info->c.info)
 		return (ERROR);
 	return (SUCCESS);
-}
-
-// debugging func
-static void	print_split(char **split)
-{
-	int	i;
-
-	i = 0;
-	printf("-------------------\n");
-	printf("[split]\n");
-	while (split[i])
-	{
-		printf("(%s)\n", split[i]);
-		i++;
-	}
 }
 
 static int	split_line(char *line, char ***tokens)
@@ -80,7 +57,6 @@ static int	split_line(char *line, char ***tokens)
 	split = *tokens;
 	if (!split)
 		return (ALLOC_FAILED);
-	print_split(*tokens);
 	if (!split[0] || !split[1] || (split[2] && ft_strcmp(split[2], "\n")))
 	{
 		ft_free_two_array(tokens);
