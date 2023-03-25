@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 20:35:05 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 03:35:06 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 03:44:03 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ static void	rotate_left(t_ray *ray, const double rs)
 
 int	loop(t_param *param)
 {
-	const double	move_speed = 0.1 * 0.5;
-	const double	rot_speed = 0.1 * 0.7;
+	const double	move_speed = 0.1 * 0.4;
+	const double	rot_speed = 0.1 * 0.4;
 
 	if (param->key[KEY_ESC])
 		exit_game(param);
