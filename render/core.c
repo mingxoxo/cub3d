@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:15:09 by wonyang           #+#    #+#             */
-/*   Updated: 2023/03/26 02:16:19 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 04:01:30 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,13 @@ static void	get_length_img(t_param *param, t_dda *dda)
 	if (dda->draw[1] >= WIN_HEIGHT)
 		dda->draw[1] = WIN_HEIGHT - 1;
 	if (dda->side == 0 && dda->ray_dir[X] > 0)
-		dda->img = param->info.so;
-	else if (dda->side == 0 && dda->ray_dir[X] <= 0)
 		dda->img = param->info.no;
+	else if (dda->side == 0 && dda->ray_dir[X] <= 0)
+		dda->img = param->info.so;
 	else if (dda->side == 1 && dda->ray_dir[Y] < 0)
-		dda->img = param->info.we;
-	else
 		dda->img = param->info.ea;
+	else
+		dda->img = param->info.we;
 }
 
 static void	get_tex(t_param *param, t_dda *dda)
