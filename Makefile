@@ -6,7 +6,7 @@
 #    By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/04 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/03/20 22:06:09 by wonyang          ###   ########seoul.kr   #
+#    Updated: 2023/03/26 01:22:27 by wonyang          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ HEADERS		= -I$(LIBFT) \
 
 LIBS		= -lft -L$(LIBFT) -Lmlx_opengl -lmlx -framework OpenGL -framework Appkit
 
-CFLAGS		= -fsanitize=address -g #-Wall -Werror -Wextra
+CFLAGS		= -Wall -Werror -Wextra
 
 
 # parsing part source files

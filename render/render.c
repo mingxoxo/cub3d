@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:13:11 by wonyang           #+#    #+#             */
-/*   Updated: 2023/03/26 01:15:56 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 01:23:03 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static void	set_dda(t_ray ray, t_dda *dda)
 
 static void	get_wall_dst(t_param *p, t_dda *d)
 {
-	int		side;
 	double	x_dst;
 
 	while (p->map.arr[d->map[X]][d->map[Y]] == '0')
@@ -131,7 +130,6 @@ void	render_screen(t_param *param)
 	int		x;
 	double	camera_x;
 	t_dda	dda;
-	double	dst;
 
 	fill_background(param->mlx, param->info.f.rgb, param->info.c.rgb);
 	x = 0;
