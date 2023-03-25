@@ -6,21 +6,12 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:13:11 by wonyang           #+#    #+#             */
-/*   Updated: 2023/03/25 18:45:18 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 00:29:17 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "cub3d.h"
-
-// void debug_dda(t_dda *dda)
-// {
-//     printf("ray_dir: (%f, %f), ", dda->ray_dir[0], dda->ray_dir[1]);
-//     printf("map: (%d, %d), ", dda->map[0], dda->map[1]);
-//     printf("side_dst: (%f, %f), ", dda->side_dst[0], dda->side_dst[1]);
-//     printf("delta_dst: (%f, %f), ", dda->delta_dst[0], dda->delta_dst[1]);
-//     printf("step: (%d, %d) ", dda->step[0], dda->step[1]);
-// }
 
 static void	set_dda(t_ray ray, t_dda *dda)
 {
@@ -55,8 +46,7 @@ static void	get_wall_dst(t_param *p, t_dda *d)
 	int		side;
 	double	x_dst;
 
-	//todo
-	while (p->map.arr[d->map[X]][d->map[Y]] == '0' || p->map.arr[d->map[X]][d->map[Y]] == 'N')
+	while (p->map.arr[d->map[X]][d->map[Y]] == '0')
 	{
 		if (d->side_dst[X] < d->side_dst[Y])
 		{
@@ -97,7 +87,6 @@ static void	draw_line(t_param *param, t_dda dda, int x)
 	double	wall;
 	int		tex[2];
 
-	// select texture
 	t_img	img;
 
 	if (dda.side == 0 && dda.ray_dir[X] > 0)
