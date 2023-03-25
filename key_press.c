@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 20:35:05 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 02:25:00 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 02:27:29 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	key_press(int key, t_param *param)
 	else if (key == KEY_W || key == KEY_S)
 		move_front_back(param, move_speed, key);
 	else if (key == KEY_A || key == KEY_D)
-		move_left_right(param, move_speed);
+		move_left_right(param, move_speed, key);
 	else if (key == KEY_RIGHT)
 		rotate_right(&(param->ray), rot_speed);
 	else if (key == KEY_LEFT)
