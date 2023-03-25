@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:27:07 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 00:24:39 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 01:26:35 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	init_img(t_img *img)
 {
+	img->ptr = NULL;
 	img->path = NULL;
 	img->data = NULL;
 	img->w = 0;
