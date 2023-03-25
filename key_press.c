@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 20:35:05 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/25 18:35:26 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 01:47:41 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	rotate_left(t_ray *ray, const double rot_speed)
 
 int	key_press(int key, t_param *param)
 {
-	const double	move_speed = 0.1 * 0.7;
+	const double	move_speed = 0.1 * 1.0;
 	const double	rot_speed = 0.1 * 1.0;
 
 	if (key == KEY_ESC)
@@ -107,6 +107,5 @@ int	key_press(int key, t_param *param)
 	else if (key == KEY_LEFT)
 		rotate_left(&(param->ray), rot_speed);
 	render_screen(param);
-	// printf("x: %lf, y: %lf\n", param->ray.pos_x, param->ray.pos_y);
 	return (0);
 }
