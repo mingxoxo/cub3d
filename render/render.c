@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:13:11 by wonyang           #+#    #+#             */
-/*   Updated: 2023/03/26 00:29:17 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 01:15:56 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,22 @@ static void	get_wall_dst(t_param *p, t_dda *d)
 		{
 			d->side_dst[X] += d->delta_dst[X];
 			d->map[X] += d->step[X];
-			side = 0;
+			d->side = 0;
 		}
 		else
 		{
 			d->side_dst[Y] += d->delta_dst[Y];
 			d->map[Y] += d->step[Y];
-			side = 1;
+			d->side = 1;
 		}
 	}
-	d->side = side;
-	if (side == 0)
+	if (d->side == 0)
 	{
 		x_dst = d->map[X] - p->ray.pos_x + (1 - d->step[X]) / 2;
-		d->wall_dst = x_dst / d->ray_dir[X];
+		d->w_dst = x_dst / d->ray_dir[X];
 		return ;
 	}
-	d->wall_dst = (d->map[Y] - p->ray.pos_y + (1 - d->step[Y]) / 2) / d->ray_dir[Y];
+	d->w_dst = (d->map[Y] - p->ray.pos_y + (1 - d->step[Y]) / 2) / d->ray_dir[Y];
 }
 
 static void	draw_line(t_param *param, t_dda dda, int x)
@@ -76,7 +75,7 @@ static void	draw_line(t_param *param, t_dda dda, int x)
 	int	line_height;
 	int	draw[2];
 
-	line_height = (int)(WIN_HEIGHT / dda.wall_dst);
+	line_height = (int)(WIN_HEIGHT / dda.w_dst);
 	draw[0] = -line_height / 2 + WIN_HEIGHT / 2;
 	if (draw[0] < 0)
 		draw[0] = 0;
@@ -99,9 +98,9 @@ static void	draw_line(t_param *param, t_dda dda, int x)
 		img = param->info.ea;
 
 	if (dda.side == 0)
-		wall = param->ray.pos_y + dda.wall_dst * dda.ray_dir[Y];
+		wall = param->ray.pos_y + dda.w_dst * dda.ray_dir[Y];
 	else
-		wall = param->ray.pos_x + dda.wall_dst * dda.ray_dir[X];
+		wall = param->ray.pos_x + dda.w_dst * dda.ray_dir[X];
 	wall -= floor(wall);
 	tex[X] = (int)(wall * (double)img.w);
 	if (dda.side == 0 && dda.ray_dir[X] > 0)
