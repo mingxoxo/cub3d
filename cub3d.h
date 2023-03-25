@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 01:14:59 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 01:25:14 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,6 @@ void	get_image(t_param *param);
 
 // render
 void	init_ray(t_param *param);
-// void	print_line(t_mlx mlx, int x, int draw[2], char *color);
 void	print_dot(t_mlx mlx, int x, int y, int color);
 void	fill_background(t_mlx mlx, int c1[3], int c2[3]);
 void	render_screen(t_param *param);
