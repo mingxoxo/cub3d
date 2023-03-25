@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 20:25:46 by wonyang           #+#    #+#             */
-/*   Updated: 2023/03/20 22:07:05 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/25 17:01:01 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,31 +38,28 @@ static int	hex_to_int(char *hex)
 	return (res);
 }
 
-static void	print_dot(t_mlx mlx, int x, int y, char *color)
+void	print_dot(t_mlx mlx, int x, int y, int color)
 {
 	char	*dst;
 
 	if (WIN_HEIGHT <= y || WIN_WIDTH <= x || x < 0 || y < 0)
 		return ;
 	dst = mlx.ptr + (y * (mlx.lsize) + x * (mlx.bit) / 8);
-	if (color == NULL)
-		*(unsigned int *)dst = create_argb(0, 255, 255, 255);
-	else
-		*(unsigned int *)dst = hex_to_int(color);
+	*(unsigned int *)dst = color;
 }
 
-void	print_line(t_mlx mlx, int x, int draw[2], char *color)
-{
-	int	i;
+// void	print_line(t_mlx mlx, int x, int draw[2], char *color)
+// {
+// 	int	i;
 
-	// printf("%d %d\n", draw[0], draw[1]);
-	i = draw[0];
-	while (i <= draw[1])
-	{
-		print_dot(mlx, x, i, color);
-		i++;
-	}
-}
+// 	// printf("%d %d\n", draw[0], draw[1]);
+// 	i = draw[0];
+// 	while (i <= draw[1])
+// 	{
+// 		print_dot(mlx, x, i, color);
+// 		i++;
+// 	}
+// }
 
 void	fill_background(t_mlx mlx)
 {

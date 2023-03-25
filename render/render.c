@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:13:11 by wonyang           #+#    #+#             */
-/*   Updated: 2023/03/21 18:48:42 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/25 18:14:58 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	set_dda(t_ray ray, t_dda *dda)
 	}
 }
 
-static double	get_wall_dst(t_param *p, t_dda *d)
+static void	get_wall_dst(t_param *p, t_dda *d)
 {
 	int		side;
 	double	x_dst;
@@ -71,20 +71,22 @@ static double	get_wall_dst(t_param *p, t_dda *d)
 			side = 1;
 		}
 	}
+	d->side = side;
 	if (side == 0)
 	{
 		x_dst = d->map[X] - p->ray.pos_x + (1 - d->step[X]) / 2;
-		return (x_dst / d->ray_dir[X]);
+		d->wall_dst = x_dst / d->ray_dir[X];
+		return ;
 	}
-	return ((d->map[Y] - p->ray.pos_y + (1 - d->step[Y]) / 2) / d->ray_dir[Y]);
+	d->wall_dst = (d->map[Y] - p->ray.pos_y + (1 - d->step[Y]) / 2) / d->ray_dir[Y];
 }
 
-static void	draw_line(t_param *param, t_dda dda, double wall_dst, int x)
+static void	draw_line(t_param *param, t_dda dda, int x)
 {
 	int	line_height;
 	int	draw[2];
 
-	line_height = (int)(WIN_HEIGHT / wall_dst);
+	line_height = (int)(WIN_HEIGHT / dda.wall_dst);
 	draw[0] = -line_height / 2 + WIN_HEIGHT / 2;
 	if (draw[0] < 0)
 		draw[0] = 0;
@@ -92,17 +94,48 @@ static void	draw_line(t_param *param, t_dda dda, double wall_dst, int x)
 	if (draw[1] >= WIN_HEIGHT)
 		draw[1] = WIN_HEIGHT - 1;
 
-	//벽 색깔 선택
-	char *color = "0x814202";
-	// switch(param->map.arr[dda.map[X]][dda.map[Y]])
-	// {
-	// 	case 1:  color = "0x810202";  break; //red
-	// 	case 2:  color = "0x028102";  break; //green
-	// 	case 3:  color = "0x020281";   break; //blue
-	// 	case 4:  color = NULL;  break; //white
-	// 	default: color = "0x814202"; break; //yellow
-	// }
-	print_line(param->mlx, x, draw, color);
+	double	wall;
+	int		tex[2];
+
+	// select texture
+	t_img	img;
+
+	if (dda.side == 0 && dda.ray_dir[X] > 0)
+		img = param->info.so;
+	else if (dda.side == 0 && dda.ray_dir[X] <= 0)
+		img = param->info.no;
+	else if (dda.side == 1 && dda.ray_dir[Y] < 0)
+		img = param->info.we;
+	else
+		img = param->info.ea;
+
+	if (dda.side == 0)
+		wall = param->ray.pos_y + dda.wall_dst * dda.ray_dir[Y];
+	else
+		wall = param->ray.pos_x + dda.wall_dst * dda.ray_dir[X];
+	wall -= floor(wall);
+	tex[X] = (int)(wall * (double)img.w);
+	if (dda.side == 0 && dda.ray_dir[X] > 0)
+		tex[X] = img.w - tex[X] - 1;
+	if (dda.side == 1 && dda.ray_dir[Y] < 0)
+		tex[X] = img.w - tex[X] - 1;
+	
+	double			step;
+	double			tex_pos;
+	int				y;
+	unsigned int	color;
+
+	step = 1.0 * img.h / line_height;
+	tex_pos = (draw[0] - WIN_HEIGHT / 2 + line_height / 2) * step;
+	y = draw[0];
+	while (y < draw[1])
+	{
+		tex[Y] = (int)tex_pos % img.h;
+		tex_pos += step;
+		color = ((unsigned int *)img.data)[img.h * tex[Y] + tex[X]];
+		print_dot(param->mlx, x, y, color);
+		y++;
+	}
 }
 
 void	render_screen(t_param *param)
@@ -120,8 +153,8 @@ void	render_screen(t_param *param)
 		dda.ray_dir[X] = param->ray.dir_x + param->ray.plane_x * camera_x;
 		dda.ray_dir[Y] = param->ray.dir_y + param->ray.plane_y * camera_x;
 		set_dda(param->ray, &dda);
-		dst = get_wall_dst(param, &dda);
-		draw_line(param, dda, dst, x);
+		get_wall_dst(param, &dda);
+		draw_line(param, dda, x);
 		x++;
 	}
 	mlx_put_image_to_window(param->mlx.mlx, param->mlx.win, \

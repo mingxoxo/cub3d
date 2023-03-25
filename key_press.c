@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 20:35:05 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/23 19:33:55 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/25 17:08:25 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,6 @@ int	key_press(int key, t_param *param)
 	else if (key == KEY_LEFT)
 		rotate_left(&(param->ray), rot_speed);
 	render_screen(param);
-	printf("x: %lf, y: %lf\n", param->ray.pos_x, param->ray.pos_y);
+	// printf("x: %lf, y: %lf\n", param->ray.pos_x, param->ray.pos_y);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/25 16:36:27 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/25 17:35:42 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_node
 
 typedef struct s_img
 {
+	void	*ptr;
 	char	*path;
 	char	*data;
 	int		w;
@@ -113,6 +114,8 @@ typedef struct s_dda
 	double	side_dst[2];
 	double	delta_dst[2];
 	int		step[2];
+	double	wall_dst;
+	int		side;
 }			t_dda;
 
 typedef struct s_param
@@ -141,7 +144,8 @@ void	get_image(t_param *param);
 
 // render
 void	init_ray(t_param *param);
-void	print_line(t_mlx mlx, int x, int draw[2], char *color);
+// void	print_line(t_mlx mlx, int x, int draw[2], char *color);
+void	print_dot(t_mlx mlx, int x, int y, int color);
 void	fill_background(t_mlx mlx);
 void	render_screen(t_param *param);
 

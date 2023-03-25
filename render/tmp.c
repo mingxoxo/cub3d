@@ -7,6 +7,8 @@
 #define mapHeight 24
 #define screenWidth 1280
 #define screenHeight 720
+int texWidth = 64;
+int texHeight = 64;
 
 enum	e_keycode
 {
@@ -74,6 +76,17 @@ typedef struct s_mlx
 	char	*ptr;
 }			t_mlx;
 
+typedef struct s_img
+{
+	char	*path;
+	void	*ptr;
+	char	*data;
+	int		w;
+	int		h;
+	int		bpp;
+	int		lsize;
+	int		end;
+}			t_img;
 
 double posX = 22, posY = 12; //플레이어의 초기 위치벡터
 double dirX = -1, dirY = 0; //플레이어의 초기 방향벡터
@@ -81,6 +94,7 @@ double planeX = 0, planeY = 0.66; //플레이어의 카메라 평면
 
 double time = 0; //현재 프레임의 시간
 double oldTime = 0; //이전 프레임의 시간
+t_img	img;
 
 
 void	init_mlx(t_mlx *m, int width, int height)
@@ -133,6 +147,16 @@ void	print_dot(t_mlx mlx, int x, int y, char *color)
 		*(unsigned int *)dst = create_argb(0, 255, 255, 255);
 	else
 		*(unsigned int *)dst = hex_to_int(color);
+}
+
+void	print_dot_int(t_mlx mlx, int x, int y, unsigned int color)
+{
+	char	*dst;
+
+	if (screenHeight <= y || screenWidth <= x || x < 0 || y < 0)
+		return ;
+	dst = mlx.ptr + (y * (mlx.lsize) + x * (mlx.bit) / 8);
+	*(unsigned int *)dst = color;
 }
 
 void	verLine(t_mlx mlx, int x, int drawStart, int drawEnd, char *color)
@@ -264,10 +288,13 @@ void	render_screen(t_mlx *mlx, int width, int height)
 		}
 
 
+		// printf("mapY: %d posY: %lf stepY: %d rayDirY: %lf ", mapY, posY, stepY, rayDirY);
 		// 카메라 평면까지의 거리 계산
 		if (side == 0) perpWallDist = (mapX - posX + (1 - stepX) / 2) / rayDirX;
 		else           perpWallDist = (mapY - posY + (1 - stepY) / 2) / rayDirY;
 
+		// printf("dist:%lf ", perpWallDist);
+		// printf("rayDir: %lf %lf\n", rayDirX, rayDirY);
 
 		// 화면에 그릴 높이 계산
 		int lineHeight = (int)(height / perpWallDist);
@@ -278,22 +305,36 @@ void	render_screen(t_mlx *mlx, int width, int height)
 		int drawEnd = lineHeight / 2 + height / 2;
 		if(drawEnd >= height)drawEnd = height - 1;
 
-		//벽 색깔 선택
-		char *color;
-		switch(worldMap[mapX][mapY])
+
+		// 텍스쳐 계산
+		// 텍스쳐 선택
+
+		// wallX: 벽에서 부딪힌 정확한 위치 계산
+		double	wallX;
+		if (side == 0)
+			wallX = posY + perpWallDist * rayDirY;
+		else
+			wallX = posX + perpWallDist * rayDirX;
+		wallX -= floor(wallX);
+		
+		// 텍스쳐의 x좌표 계산
+		int	texX = (int)(wallX * (double)texWidth);
+		if (side == 0 && rayDirX > 0)
+			texX = texWidth - texX - 1;
+		if (side == 1 && rayDirY < 0)
+			texX = texWidth - texX - 1;
+
+		// 아핀 텍스처매핑 - 선형보간법
+		double step = 1.0 * texHeight / lineHeight;
+		double texPos = (drawStart - height / 2 + lineHeight / 2) * step;
+		for (int y = drawStart; y < drawEnd; y++)
 		{
-			case 1:  color = "0x810202";  break; //red
-			case 2:  color = "0x028102";  break; //green
-			case 3:  color = "0x020281";   break; //blue
-			case 4:  color = NULL;  break; //white
-			default: color = "0x814202"; break; //yellow
+			int texY = (int)texPos % texHeight;
+			texPos += step;
+
+			unsigned int color = ((unsigned int *)img.data)[texHeight * texY + texX];
+			print_dot_int(*mlx, x, y, color);
 		}
-
-		// y면에 부딪힌 경우 색상을더 어둡게 설정하면 그럴 듯하게 표현 가능
-		// if (side == 1) {color = color / 2;}
-
-		// 수직선 그리기
-		verLine(*mlx, x, drawStart, drawEnd, color);
 	}
 }
 
@@ -365,6 +406,7 @@ int	hooks(int keycode, t_mlx *mlx)
 	return (1);
 }
 
+
 int	main(void)
 {
 	//mlx 초기화
@@ -374,7 +416,16 @@ int	main(void)
 	const int	height = screenHeight;
 
 	init_mlx(&mlx, width, height);
+
+	img.path = "so.xpm";
+	img.ptr = mlx_xpm_file_to_image(mlx.mlx, img.path, &(img.w), &(img.h));
+	img.data = mlx_get_data_addr(img.ptr, &img.bpp, &img.lsize, &img.end);
+
+	texWidth = img.w;
+	texHeight = img.h;
+
 	render_screen(&mlx, screenWidth, screenHeight);
+
 	mlx_put_image_to_window(mlx.mlx, mlx.win, mlx.img, 0, 0);
 
 	mlx_key_hook(mlx.win, hooks, &mlx);

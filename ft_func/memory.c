@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 20:32:48 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/25 16:41:30 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/25 17:34:22 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static void	ft_free_img(t_img *img, void *mlx)
 		return ;
 	if (img->path)
 		free(img->path);
+	if (mlx && img->ptr)
+		mlx_destroy_image(mlx, img->ptr);
 }
 
 static void	ft_free_color(t_color *color)
