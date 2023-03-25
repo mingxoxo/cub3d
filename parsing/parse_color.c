@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:53:57 by wonyang           #+#    #+#             */
-/*   Updated: 2023/03/17 16:17:50 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 00:00:10 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,30 +62,13 @@ static int	parse_rgb(t_color *color)
 	return (SUCCESS);
 }
 
-// debugging func
-static void	print_color(t_color *color, char *name)
-{
-	int	i;
-
-	i = 0;
-	printf("-------------------------\n");
-	printf("[%s]\n", name);
-	while (i < 3)
-	{
-		printf("(%d)\n", color->rgb[i]);
-		i++;
-	}
-}
-
 int	parse_color(t_info *info)
 {
 	int	errno;
 
 	errno = parse_rgb(&(info->f));
-	print_color(&(info->f), "F");
 	if (errno)
 		return (errno);
 	errno = parse_rgb(&(info->c));
-	print_color(&(info->c), "C");
 	return (errno);
 }

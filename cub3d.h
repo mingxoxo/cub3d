@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/25 18:45:27 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 00:24:22 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct s_map
 {
 	int		sx;
 	int		sy;
+	char	sdir;
 	int		height;
 	int		width;
 	char	**arr;

@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 17:13:33 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/16 20:26:31 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/26 00:10:26 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,21 +81,6 @@ static void	cast_map(t_param *param, t_list *lst)
 	}
 }
 
-// debugging func
-// static void	print_arr(char **map)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	printf("-------------------\n");
-// 	printf("[map]\n");
-// 	while (map[i])
-// 	{
-// 		printf("%s\n", map[i]);
-// 		i++;
-// 	}
-// }
-
 void	parse_map(t_list *lst, t_param *param)
 {
 	if (lst == NULL)
@@ -105,5 +90,7 @@ void	parse_map(t_list *lst, t_param *param)
 	cast_map(param, lst);
 	check_map(param, lst);
 	cast_map(param, lst);
+	param->map.sdir = param->map.arr[param->map.sx][param->map.sy];
+	param->map.arr[param->map.sx][param->map.sy] = '0';
 	ft_lstclear(&lst, free);
 }
