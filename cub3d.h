@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 01:25:14 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 02:15:47 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,10 @@ typedef struct s_dda
 	int		step[2];
 	double	w_dst;
 	int		side;
+	int		l_height;
+	int		draw[2];
+	t_img	img;
+	int		tex[2];
 }			t_dda;
 
 typedef struct s_param
@@ -146,6 +150,7 @@ void	get_image(t_param *param);
 // render
 void	init_ray(t_param *param);
 void	print_dot(t_mlx mlx, int x, int y, int color);
+void	draw_line(t_param *param, t_dda *d, int x);
 void	fill_background(t_mlx mlx, int c1[3], int c2[3]);
 void	render_screen(t_param *param);
 
