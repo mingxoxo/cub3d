@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 19:13:33 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/18 22:26:04 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/25 23:59:53 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,18 +78,6 @@ static t_list	*divide_lst(t_list **head)
 	return (lst);
 }
 
-// debugging func
-// static void	print_lst(t_list *lst)
-// {
-// 	printf("-------------------------\n");
-// 	while (lst)
-// 	{
-// 		printf("%s", (char *)(lst->content));
-// 		lst = lst->next;
-// 	}
-// 	printf("\n");
-// }
-
 static void	check_error(int errno, t_list *lst[2], t_param *param)
 {
 	if (!errno)
@@ -109,8 +97,6 @@ void	parse(char *filename, t_param *param)
 
 	lst[0] = read_file(filename, param);
 	lst[1] = divide_lst(lst);
-	// print_lst(lst[0]);
-	// print_lst(lst[1]);
 	errno = parse_info(lst[0], param);
 	check_error(errno, lst, param);
 	errno = parse_color(&(param->info));
