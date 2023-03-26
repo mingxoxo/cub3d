@@ -6,7 +6,7 @@
 #    By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/04 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/03/26 03:41:02 by wonyang          ###   ########seoul.kr   #
+#    Updated: 2023/03/26 17:45:52 by wonyang          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,13 +75,36 @@ GNL_SRCS	= $(addprefix $(GNL_DIR), $(_GNL_SRCS))
 # main source files
 SRCS		= main.c \
 			  init.c \
-			  key_press.c
+			  key_press.c \
+			  $(PARSING_SRCS) \
+			  $(RENDER_SRCS) \
+			  $(FUNC_SRCS)
 
-OBJS		= $(SRCS:%.c=%.o) \
-			  $(PARSING_SRCS:%.c=%.o) \
-			  $(RENDER_SRCS:%.c=%.o) \
-			  $(FUNC_SRCS:%.c=%.o) \
-			  $(GNL_SRCS:%.c=%.o)
+
+# mandatory bonus
+MANDATORY_SRCS	= $(addprefix mandatory/, $(SRCS))
+MANDATORY_HEAD	= -Imandatory \
+				  $(HEADERS)
+
+_BONUS_SRCS		= $(addprefix bonus/, $(SRCS))
+BONUS_SRCS		= $(patsubst %.c, %_bonus.c, $(_BONUS_SRCS)) \
+				  bonus/event_bonus.c
+BONUS_HEAD		= -Ibonus \
+				  $(HEADERS)
+
+MANDATORY_OBJS	= $(MANDATORY_SRCS:%.c=%.o)
+BONUS_OBJS		= $(BONUS_SRCS:%.c=%.o)
+GNL_OBJS		= $(GNL_SRCS:%.c=%.o)
+
+ifdef WITH_BONUS
+	OBJ_FILES = $(BONUS_OBJS)
+	DELETE_FILES = $(MANDATORY_OBJS)
+	HEADER = $(BONUS_HEAD)
+else
+	OBJ_FILES = $(MANDATORY_OBJS)
+	DELETE_FILES = $(BONUS_OBJS)
+	HEADER	= $(MANDATORY_HEAD)
+endif
 
 # define compile commands
 $(NAME) : 	$(OBJS) $(LIBFT_LIB)
