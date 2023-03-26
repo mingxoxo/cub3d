@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 03:37:13 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 15:05:15 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdio.h>
 # include "libft.h"
-# include "mlx_opengl/mlx.h"
+# include "../mlx_opengl/mlx.h"
 
 # define X 0
 # define Y 1
