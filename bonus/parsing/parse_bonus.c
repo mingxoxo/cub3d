@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 19:13:33 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 15:11:51 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 23:33:07 by jeongmin         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ static int	is_element(char *line)
 {
 	int			i;
 	int			len;
-	const char	identifier[6][3] = {"NO", "SO", "WE", "EA", "F", "C"};
+	const char	identifier[8][3] = {"NO", "SO", "WE", "EA", "F", "C", "D", "SP"};
 
 	if (line[0] == '\n')
 		return (TRUE);
 	while (*line == ' ')
 		line++;
 	i = 0;
-	while (i < 6)
+	while (i < 8)
 	{
 		len = ft_strlen(identifier[i]);
 		if (ft_strncmp(line, identifier[i], len) == 0 && *(line + len) == ' ')
@@ -78,30 +78,53 @@ static t_list	*divide_lst(t_list **head)
 	return (lst);
 }
 
-static void	check_error(int errno, t_list *lst[2], t_param *param)
+static void	check_error(int errno, t_list *lst[4], t_param *param)
 {
 	if (!errno)
 		return ;
 	ft_lstclear(&(lst[0]), free);
 	ft_lstclear(&(lst[1]), free);
+	ft_lstclear(&(lst[2]), free);
+	ft_lstclear(&(lst[3]), free);
 	if (errno == ERROR)
 		ft_error_exit("element: The input format is invalid", param);
 	else
 		ft_perror_exit("param: element", param);
 }
 
+// debugging func
+// static void	print_lst(t_list *lst)
+// {
+// 	printf("------------check-------------\n");
+// 	while (lst)
+// 	{
+// 		printf("%s", (char *)(lst->content));
+// 		lst = lst->next;
+// 	}
+// 	printf("\n");
+// }
+
 void	parse(char *filename, t_param *param)
 {
 	int		errno;
-	t_list	*lst[2];
+	t_list	*lst[4];
 
 	lst[0] = read_file(filename, param);
 	lst[1] = divide_lst(lst);
+	lst[2] = NULL;
+	lst[3] = NULL;
+	divide_lst_by_type(lst, lst + 2, lst + 3);
 	errno = parse_info(lst[0], param);
 	check_error(errno, lst, param);
 	errno = parse_color(&(param->info));
 	check_error(errno, lst, param);
+	errno = parse_info_bonus(lst[2], &(param->info.d), &(param->info.d_cnt));
+	check_error(errno, lst, param);
+	errno = parse_info_bonus(lst[3], &(param->info.sp), &(param->info.sp_cnt));
+	check_error(errno, lst, param);
 	ft_lstclear(&(lst[0]), free);
+	ft_lstclear(&(lst[2]), free);
+	ft_lstclear(&(lst[3]), free);
 	parse_map(lst[1], param);
 	get_image(param);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 17:13:33 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 15:11:51 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 23:55:51 by jeongmin         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,9 @@ static char	*check_char(t_map *map, char **arr)
 				map->sx = i;
 				map->sy = j;
 			}
-			else if (ft_strchr("01 ", arr[i][j]) == NULL)
+			else if (ft_strchr("01DA ", arr[i][j]) == NULL)
 				return ("map: The character must be \
-0, 1, N, S, E, W or space.");
+0, 1, N, S, E, W, D, A or space.");
 			j++;
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 18:54:43 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 23:20:34 by jeongmin         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,12 @@ typedef struct s_info
 	t_img	so;
 	t_img	we;
 	t_img	ea;
+	t_img	*d;
+	t_img	*sp;
 	t_color	f;
 	t_color	c;
+	int		d_cnt;
+	int		sp_cnt;
 }		t_info;
 
 typedef struct s_map
@@ -144,6 +148,7 @@ int		mouse_move(int x, int y, t_param *param);
 
 // init
 void	init_param(t_param *param);
+void	init_img(t_img *img);
 
 // key_press.c
 int		loop(t_param *param);
@@ -158,6 +163,8 @@ void	parse_map(t_list *lst, t_param *param);
 int		parse_color(t_info *info);
 void	check_map(t_param *param, t_list *lst);
 void	get_image(t_param *param);
+void 	divide_lst_by_type(t_list **m_lst, t_list **d_lst, t_list **sp_lst);
+int		parse_info_bonus(t_list *lst, t_img **img, int *cnt);
 
 // render
 void	init_ray(t_param *param);

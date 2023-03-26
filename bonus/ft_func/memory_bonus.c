@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 20:32:48 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 15:11:51 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 23:46:44 by jeongmin         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ static void	ft_free_color(t_color *color)
 
 void	ft_free_param(t_param *param)
 {
+	int	i;
+	
 	if (!param)
 		return ;
 	if (param->map.arr)
@@ -68,6 +70,26 @@ void	ft_free_param(t_param *param)
 	ft_free_img(&(param->info.ea), param->mlx.mlx);
 	ft_free_color(&(param->info.f));
 	ft_free_color(&(param->info.c));
+	if (param->info.d)
+	{
+		i = 0;
+		while (i < param->info.d_cnt)
+		{
+			ft_free_img(param->info.d + i, param->mlx.mlx);
+			i++;
+		}
+		free(param->info.d);
+	}
+	if (param->info.sp)
+	{
+		i = 0;
+		while (i < param->info.sp_cnt)
+		{
+			ft_free_img(param->info.sp + i, param->mlx.mlx);
+			i++;
+		}
+		free(param->info.sp);
+	}
 	if (param->mlx.mlx && param->mlx.win)
 		mlx_destroy_window(param->mlx.mlx, param->mlx.win);
 	return ;

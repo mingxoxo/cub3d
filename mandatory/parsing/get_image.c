@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_image.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:45:15 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/25 17:35:13 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 23:32:40 by jeongmin         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	file_to_image(t_img *img, t_param *param)
+static void	file_to_image(t_img *img, t_param *param)
 {
 	img->ptr = mlx_xpm_file_to_image(param->mlx.mlx, img->path, \
 									&(img->w), &(img->h));
