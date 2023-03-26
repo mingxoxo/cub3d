@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+         #
+#    By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/04 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/03/26 04:26:33 by jeongmin         ###   ########.fr        #
+#    Updated: 2023/03/26 18:45:38 by jeongmin         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,8 +22,7 @@ GNL_HEADER = get_next_line.h
 MLX		   = mlx_opengl
 
 HEADERS		= -I$(LIBFT) \
-			  -I$(GNL) \
-			  -I./
+			  -I$(GNL)
 
 LIBS		= -lft -L$(LIBFT) -Lmlx_opengl -lmlx -framework OpenGL -framework Appkit
 
@@ -53,7 +52,7 @@ _RENDER_SRCS	= init.c \
 
 RENDER_SRCS	= $(addprefix $(RENDER_DIR), $(_RENDER_SRCS))
 
-#ft_func source files
+# ft_func source files
 FUNC_DIR		= ft_func/
 
 _FUNC_SRCS	= error_exit.c \
@@ -64,13 +63,7 @@ _FUNC_SRCS	= error_exit.c \
 
 FUNC_SRCS	= $(addprefix $(FUNC_DIR), $(_FUNC_SRCS))
 
-MINIMAP_DIR		= minimap/
-
-_MINIMAP_SRCS	= minimap.c
-
-MINIMAP_SRCS	= $(addprefix $(MINIMAP_DIR), $(_MINIMAP_SRCS))
-
-#ft_func source files
+# GNL source files
 GNL_DIR		= $(GNL)/
 
 _GNL_SRCS	= get_next_line.c \
@@ -81,30 +74,58 @@ GNL_SRCS	= $(addprefix $(GNL_DIR), $(_GNL_SRCS))
 # main source files
 SRCS		= main.c \
 			  init.c \
-			  key_press.c
+			  key_press.c \
+			  $(PARSING_SRCS) \
+			  $(RENDER_SRCS) \
+			  $(FUNC_SRCS)
 
-OBJS		= $(SRCS:%.c=%.o) \
-			  $(PARSING_SRCS:%.c=%.o) \
-			  $(RENDER_SRCS:%.c=%.o) \
-			  $(FUNC_SRCS:%.c=%.o) \
-			  $(MINIMAP_SRCS:%.c=%.o) \
-			  $(GNL_SRCS:%.c=%.o)
+
+# mandatory bonus
+MANDATORY_SRCS	= $(addprefix mandatory/, $(SRCS))
+MANDATORY_HEAD	= -Imandatory \
+				  $(HEADERS)
+
+_BONUS_SRCS		= $(addprefix bonus/, $(SRCS))
+BONUS_SRCS		= $(patsubst %.c, %_bonus.c, $(_BONUS_SRCS)) \
+				  bonus/event_bonus.c \
+				  bonus/minimap_bonus.c
+				  
+BONUS_HEAD		= -Ibonus \
+				  $(HEADERS)
+
+MANDATORY_OBJS	= $(MANDATORY_SRCS:%.c=%.o)
+BONUS_OBJS		= $(BONUS_SRCS:%.c=%.o)
+GNL_OBJS		= $(GNL_SRCS:%.c=%.o)
+
+ifdef WITH_BONUS
+	OBJ_FILES = $(BONUS_OBJS)
+	DELETE_FILES = $(MANDATORY_OBJS)
+	HEADER = $(BONUS_HEAD)
+else
+	OBJ_FILES = $(MANDATORY_OBJS)
+	DELETE_FILES = $(BONUS_OBJS)
+	HEADER	= $(MANDATORY_HEAD)
+endif
 
 # define compile commands
-$(NAME) : 	$(OBJS) $(LIBFT_LIB)
+$(NAME) : 	$(OBJ_FILES) $(LIBFT_LIB) $(GNL_OBJS)
+			@rm -f $(DELETE_FILES)
 			@make -C $(MLX)
-			cc $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
+			cc $(CFLAGS) -o $(NAME) $(OBJ_FILES) $(GNL_OBJS) $(LIBS)
 
 all	:		$(NAME)
+
+bonus:
+			@make WITH_BONUS=1 all
 
 $(LIBFT_LIB):
 			make bonus -C $(LIBFT)/
 
 %.o	: 		%.c
-			cc $(CFLAGS) -c $^ $(HEADERS) -o $@
+			cc $(CFLAGS) -c $^ $(HEADER) -o $@
 
 clean	:
-			rm -f $(OBJS)
+			rm -f $(MANDATORY_OBJS) $(BONUS_OBJS) $(GNL_OBJS)
 			make clean -C $(LIBFT)
 			make clean -C $(MLX)
 
@@ -117,4 +138,4 @@ re	:
 			make fclean
 			make all
 
-.PHONY	:	all clean fclean re
+.PHONY	:	all clean fclean re bonus

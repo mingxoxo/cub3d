@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 04:26:25 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/26 17:48:27 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # include <stdio.h>
 # include "libft.h"
-# include "mlx_opengl/mlx.h"
+# include "../mlx_opengl/mlx.h"
 
 # define X 0
 # define Y 1
@@ -26,9 +26,6 @@
 # define ERROR -1
 # define SUCCESS 0
 # define ALLOC_FAILED 1
-
-# define MAX_W 25
-# define MAX_H 25
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
@@ -133,9 +130,14 @@ typedef struct s_param
 	t_info	info;
 	t_ray	ray;
 	int		key[256];
+	int		mouse[2];
 }			t_param;
 
+// event.c
 int		exit_game(t_param *param);
+int		key_release(int key, t_param *param);
+int		key_press(int key, t_param *param);
+int		mouse_move(int x, int y, t_param *param);
 
 // init
 void	init_param(t_param *param);
@@ -176,8 +178,5 @@ int		init_queue(t_node **queue, int sx, int sy);
 void	ft_free_queue(t_node **queue);
 int		enqueue(t_node *head, int x, int y);
 void	dequeue(t_node *head, int cor[2]);
-
-// minimap.c
-void	draw_minimap(t_param *param);
 
 #endif
