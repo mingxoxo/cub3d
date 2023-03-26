@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 17:13:33 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 23:55:51 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/27 02:59:27 by jeongmin         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,16 @@ static int	bfs(t_node *queue, int h, int w, char **arr)
 			n[X] = cor[X] + d[X][i];
 			n[Y] = cor[Y] + d[Y][i];
 			i++;
-			if (is_path(n, h, w, arr) == -1)
-				return (-1);
+			if (is_path(n, h, w, arr) == ERROR)
+				return (ERROR);
 			if (is_path(n, h, w, arr))
 				continue ;
 			arr[n[X]][n[Y]] = '_';
 			if (enqueue(queue, n[X], n[Y]))
-				return (1);
+				return (ALLOC_FAILED);
 		}
 	}
-	return (0);
+	return (SUCCESS);
 }	
 
 static int	check_path(t_map *map, char **arr)
@@ -69,7 +69,7 @@ static int	check_path(t_map *map, char **arr)
 		j = 0;
 		while (arr[i][j])
 		{
-			if (ft_strchr("NSEW0", arr[i][j]))
+			if (ft_strchr("NSEW0DA", arr[i][j]))
 			{
 				if (init_queue(&queue, i, j))
 					return (1);

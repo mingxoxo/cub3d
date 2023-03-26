@@ -6,7 +6,7 @@
 #    By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/04 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/03/26 22:47:02 by jeongmin         ###   ########seoul.kr   #
+#    Updated: 2023/03/27 03:22:59 by jeongmin         ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,8 @@ BONUS_SRCS		= $(patsubst %.c, %_bonus.c, $(_BONUS_SRCS)) \
 				  bonus/event_bonus.c \
 				  bonus/minimap_bonus.c \
 				  bonus/parsing/door_sprite_bonus.c \
-				  bonus/parsing/divide_lst_type_bonus.c
+				  bonus/parsing/divide_lst_type_bonus.c \
+				  bonus/parsing/check_bonus.c
 				  
 BONUS_HEAD		= -Ibonus \
 				  $(HEADERS)

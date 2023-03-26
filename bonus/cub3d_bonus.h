@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 23:20:34 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/27 03:17:39 by jeongmin         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ void	check_map(t_param *param, t_list *lst);
 void	get_image(t_param *param);
 void 	divide_lst_by_type(t_list **m_lst, t_list **d_lst, t_list **sp_lst);
 int		parse_info_bonus(t_list *lst, t_img **img, int *cnt);
+int		check_bonus(t_list *map_lst, t_list *d_lst, t_list *sp_lst);
 
 // render
 void	init_ray(t_param *param);
