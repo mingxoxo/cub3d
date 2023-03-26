@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 20:35:05 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 15:11:51 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 16:04:07 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	main(int argc, char **argv)
 	render_screen(&param);
 	mlx_key_hook(param.mlx.win, key_release, &param);
 	mlx_hook(param.mlx.win, 2, 0, key_press, &param);
+	mlx_hook(param.mlx.win, 17, 0, exit_game, &param);
 	mlx_loop_hook(param.mlx.mlx, loop, &param);
 	mlx_loop(param.mlx.mlx);
 	return (0);
