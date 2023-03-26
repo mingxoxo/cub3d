@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:06:18 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 18:54:56 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 18:57:39 by jeongmin         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,10 @@ void	draw_minimap(t_param *param)
 	arr = param->map.arr;
 	calc_start_cor(param, s);
 	i = 0;
-	while (i < param->map.height && i < MAX_H)
+	while (i < param->map.height && i < MINI_H)
 	{
 		j = 0;
-		while (j < param->map.width && j < MAX_W)
+		while (j < param->map.width && j < MINI_W)
 		{
 			if (arr[i + s[Y]][j + s[X]] == ' ')
 				print_rect(param->mlx, j * 10, i * 10, 0x333333);
