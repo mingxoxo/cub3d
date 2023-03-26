@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:06:18 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 18:57:39 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/27 03:27:53 by jeongmin         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,10 @@ void	draw_minimap(t_param *param)
 				print_rect(param->mlx, j * 10, i * 10, 0x333333);
 			else if (arr[i + s[Y]][j + s[X]] == '1')
 				print_rect(param->mlx, j * 10, i * 10, 0x050099);
+			else if (arr[i + s[Y]][j + s[X]] == 'D')
+				print_rect(param->mlx, j * 10, i * 10, 0x8B4513);
+			else if (arr[i + s[Y]][j + s[X]] == 'A')
+				print_rect(param->mlx, j * 10, i * 10, 0xEE82EE);
 			else
 				print_rect(param->mlx, j * 10, i * 10, 0xD5D5D5);
 			j++;
