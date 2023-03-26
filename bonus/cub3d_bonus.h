@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 17:48:27 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 18:54:43 by jeongmin         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
+
+# define MINI_W 25
+# define MINI_H 25
 
 enum	e_keycode
 {
@@ -144,6 +147,9 @@ void	init_param(t_param *param);
 
 // key_press.c
 int		loop(t_param *param);
+
+// minimap
+void	draw_minimap(t_param *param);
 
 // parsing
 void	parse(char *filename, t_param *param);

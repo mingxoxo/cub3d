@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap.c                                          :+:      :+:    :+:   */
+/*   minimap_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:06:18 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 04:20:48 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/26 18:54:56 by jeongmin         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 #include <math.h>
 
 static void	calc_start_cor(t_param *param, int s[2])
@@ -22,14 +22,14 @@ static void	calc_start_cor(t_param *param, int s[2])
 
 	s[X] = 0;
 	s[Y] = 0;
-	if (MAX_H < param->map.height)
+	if (MINI_H < param->map.height)
 	{
-		min_h = ft_min(pos_x + MAX_H / 2 + 1, param->map.height) - MAX_H;
+		min_h = ft_min(pos_x + MINI_H / 2 + 1, param->map.height) - MINI_H;
 		s[Y] = ft_max(0, min_h);
 	}
-	if (MAX_W < param->map.width)
+	if (MINI_W < param->map.width)
 	{
-		min_w = ft_min(pos_y + MAX_W / 2 + 1, param->map.width) - MAX_W;
+		min_w = ft_min(pos_y + MINI_W / 2 + 1, param->map.width) - MINI_W;
 		s[X] = ft_max(0, min_w);
 	}
 }
