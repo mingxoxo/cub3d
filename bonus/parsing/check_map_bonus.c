@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 17:13:33 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/27 02:24:17 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/27 02:59:27 by jeongmin         ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	check_path(t_map *map, char **arr)
 		j = 0;
 		while (arr[i][j])
 		{
-			if (ft_strchr("NSEW0", arr[i][j]))
+			if (ft_strchr("NSEW0DA", arr[i][j]))
 			{
 				if (init_queue(&queue, i, j))
 					return (1);
