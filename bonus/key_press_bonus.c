@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 20:35:05 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 15:11:51 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 17:48:57 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ static void	rotate_left(t_ray *ray, const double rs)
 int	loop(t_param *param)
 {
 	const double	move_speed = 0.1 * 0.4;
-	const double	rot_speed = 0.1 * 0.4;
+	const double	rs = 0.1 * 0.4;
+	const int		x = param->mouse[X];
 
 	if (param->key[KEY_ESC])
 		exit_game(param);
@@ -93,9 +94,13 @@ int	loop(t_param *param)
 	if (param->key[KEY_A] || param->key[KEY_D])
 		move_left_right(param, move_speed);
 	if (param->key[KEY_RIGHT])
-		rotate_right(&(param->ray), rot_speed);
+		rotate_right(&(param->ray), rs);
 	if (param->key[KEY_LEFT])
-		rotate_left(&(param->ray), rot_speed);
+		rotate_left(&(param->ray), rs);
+	if (x < WIN_WIDTH / 2 - 50)
+		rotate_left(&(param->ray), -rs / (2 * WIN_WIDTH) * x + rs / 2);
+	if (x > WIN_WIDTH / 2 + 50)
+		rotate_right(&(param->ray), rs / (2 * WIN_WIDTH) * x - rs / 4);
 	render_screen(param);
 	return (0);
 }

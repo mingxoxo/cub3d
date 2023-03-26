@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 15:12:14 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 17:48:27 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,9 +130,14 @@ typedef struct s_param
 	t_info	info;
 	t_ray	ray;
 	int		key[256];
+	int		mouse[2];
 }			t_param;
 
+// event.c
 int		exit_game(t_param *param);
+int		key_release(int key, t_param *param);
+int		key_press(int key, t_param *param);
+int		mouse_move(int x, int y, t_param *param);
 
 // init
 void	init_param(t_param *param);

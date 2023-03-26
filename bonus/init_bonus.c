@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:27:07 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 15:11:51 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/26 17:48:39 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ void	init_param(t_param *param)
 	i = 0;
 	while (i < 256)
 		param->key[i++] = 0;
+	param->mouse[X] = WIN_WIDTH / 2;
+	param->mouse[Y] = WIN_HEIGHT / 2;
 	init_img(&(param->info.no));
 	init_img(&(param->info.so));
 	init_img(&(param->info.we));
