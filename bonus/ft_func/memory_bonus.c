@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 20:32:48 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/29 19:24:47 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/29 19:29:49 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,25 @@ static void	ft_free_color(t_color *color)
 		free(color->info);
 }
 
-void	ft_free_param(t_param *param)
+static void	ft_free_img_array(t_img **img, int cnt, void *mlx)
 {
 	int	i;
-	
+
+	if (*img)
+	{
+		i = 0;
+		while (i < cnt)
+		{
+			ft_free_img((*img) + i, mlx);
+			i++;
+		}
+		free(*img);
+		*img = 0;
+	}
+}
+
+void	ft_free_param(t_param *param)
+{
 	if (!param)
 		return ;
 	if (param->map.arr)
@@ -60,26 +75,8 @@ void	ft_free_param(t_param *param)
 	ft_free_img(&(param->info.ea), param->mlx.mlx);
 	ft_free_color(&(param->info.f));
 	ft_free_color(&(param->info.c));
-	if (param->info.d)
-	{
-		i = 0;
-		while (i < param->info.d_cnt)
-		{
-			ft_free_img(param->info.d + i, param->mlx.mlx);
-			i++;
-		}
-		free(param->info.d);
-	}
-	if (param->info.sp)
-	{
-		i = 0;
-		while (i < param->info.sp_cnt)
-		{
-			ft_free_img(param->info.sp + i, param->mlx.mlx);
-			i++;
-		}
-		free(param->info.sp);
-	}
+	ft_free_img_array(&(param->info.d), param->info.d_cnt, param->mlx.mlx);
+	ft_free_img_array(&(param->info.sp), param->info.sp_cnt, param->mlx.mlx);
 	if (param->mlx.mlx && param->mlx.win)
 		mlx_destroy_window(param->mlx.mlx, param->mlx.win);
 	return ;
