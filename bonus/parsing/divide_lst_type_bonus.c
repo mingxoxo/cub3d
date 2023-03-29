@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   divide_lst_type_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 21:59:52 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 22:46:39 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/29 21:14:37 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ void	divide_lst_by_type(t_list **m_lst, t_list **d_lst, t_list **sp_lst)
 				*m_lst = lst->next;
 			lst->next = NULL;
 			ft_lstadd_back(d_lst, lst);
-			lst = prev->next;
+			if (prev)
+				lst = prev->next;
+			else
+				lst = *m_lst;
 		}
 		else if (is_sprite(lst->content))
 		{
@@ -67,10 +70,12 @@ void	divide_lst_by_type(t_list **m_lst, t_list **d_lst, t_list **sp_lst)
 				prev->next = lst->next;
 			else
 				*m_lst = lst->next;
-			prev->next = lst->next;
 			lst->next = NULL;
 			ft_lstadd_back(sp_lst, lst);
-			lst = prev->next;
+			if (prev)
+				lst = prev->next;
+			else
+				lst = *m_lst;
 		}
 		else
 		{
