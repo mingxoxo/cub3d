@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/29 19:24:42 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/29 21:33:12 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,7 @@ int		check_bonus(t_list *map_lst, t_list *d_lst, t_list *sp_lst);
 // render
 void	init_ray(t_param *param);
 void	print_dot(t_mlx mlx, int x, int y, int color);
+void	print_mini_rect(t_mlx mlx, int x, int y, int color);
 void	draw_line(t_param *param, t_dda *d, int x);
 void	fill_background(t_mlx mlx, int c1[3], int c2[3]);
 void	render_screen(t_param *param);
