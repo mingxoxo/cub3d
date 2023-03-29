@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door_sprite_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 21:59:52 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 23:57:08 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/29 21:29:42 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ static int	split_line(char *line, char ***tokens)
 
 static int	init_img_arr(t_list *lst, t_img **img, int *cnt)
 {
-	int	i = 0;
+	int	i;
+
+	i = 0;
 	while (lst)
 	{
 		(*cnt)++;
@@ -59,19 +61,6 @@ static int	init_img_arr(t_list *lst, t_img **img, int *cnt)
 		i++;
 	}
 	return (SUCCESS);
-}
-
-//디버깅
-static void print_img_arr(t_img *img, int cnt)
-{
-	int		i;
-
-	i = 0;
-	while (i < cnt)
-	{
-		printf("%i, [%s]\n", i, img[i].path);
-		i++;
-	}
 }
 
 int	parse_info_bonus(t_list *lst, t_img **img, int *cnt)
@@ -96,6 +85,5 @@ int	parse_info_bonus(t_list *lst, t_img **img, int *cnt)
 		lst = lst->next;
 		i++;
 	}
-	print_img_arr(*img, *cnt);
 	return (SUCCESS);
 }

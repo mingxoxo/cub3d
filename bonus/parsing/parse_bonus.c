@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 19:13:33 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/27 03:29:25 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/29 19:31:03 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ static int	is_element(char *line)
 {
 	int			i;
 	int			len;
-	const char	identifier[8][3] = {"NO", "SO", "WE", "EA", "F", "C", "D", "SP"};
+	const char	identifier[8][3] = {"NO", "SO", "WE", "EA", "F", "C", \
+									"D", "SP"};
 
 	if (line[0] == '\n')
 		return (TRUE);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:06:18 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/27 03:27:53 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/29 21:42:42 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,6 @@ static void	calc_start_cor(t_param *param, int s[2])
 	{
 		min_w = ft_min(pos_y + MINI_W / 2 + 1, param->map.width) - MINI_W;
 		s[X] = ft_max(0, min_w);
-	}
-}
-
-static void	print_rect(t_mlx mlx, int x, int y, int color)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < 10)
-	{
-		j = 0;
-		while (j < 10)
-		{
-			print_dot(mlx, x + i, y + j, color);
-			j++;
-		}
-		i++;
 	}
 }
 
@@ -77,18 +59,33 @@ static void	draw_player_view(t_mlx mlx, t_ray ray, int s[2])
 	const double	dir_x = ray.dir_x;
 	const double	dir_y = ray.dir_y;
 
-	print_rect(mlx, pos_y * 10, pos_x * 10, 0xFF0000);
+	print_mini_rect(mlx, pos_y * 10, pos_x * 10, 0xFF0000);
 	print_view(mlx, (pos_y + dir_y) * 10, (pos_x + dir_x) * 10, 0x1FDA11);
+}
+
+static int	matching_color(char c)
+{
+	int			i;
+	const char	*identifier = " 1DA";
+	const int	color[5] = {0x333333, 0x050099, 0x8B4513, 0xEE82EE, 0xD5D5D5};
+
+	i = 0;
+	while (i < 4)
+	{
+		if (c == identifier[i])
+			return (color[i]);
+		i++;
+	}
+	return (color[4]);
 }
 
 void	draw_minimap(t_param *param)
 {
-	int			i;
-	int			j;
-	char		**arr;
-	int			s[2];
+	int	i;
+	int	j;
+	int	color;
+	int	s[2];
 
-	arr = param->map.arr;
 	calc_start_cor(param, s);
 	i = 0;
 	while (i < param->map.height && i < MINI_H)
@@ -96,16 +93,8 @@ void	draw_minimap(t_param *param)
 		j = 0;
 		while (j < param->map.width && j < MINI_W)
 		{
-			if (arr[i + s[Y]][j + s[X]] == ' ')
-				print_rect(param->mlx, j * 10, i * 10, 0x333333);
-			else if (arr[i + s[Y]][j + s[X]] == '1')
-				print_rect(param->mlx, j * 10, i * 10, 0x050099);
-			else if (arr[i + s[Y]][j + s[X]] == 'D')
-				print_rect(param->mlx, j * 10, i * 10, 0x8B4513);
-			else if (arr[i + s[Y]][j + s[X]] == 'A')
-				print_rect(param->mlx, j * 10, i * 10, 0xEE82EE);
-			else
-				print_rect(param->mlx, j * 10, i * 10, 0xD5D5D5);
+			color = matching_color(param->map.arr[i + s[Y]][j + s[X]]);
+			print_mini_rect(param->mlx, j * 10, i * 10, color);
 			j++;
 		}
 		i++;

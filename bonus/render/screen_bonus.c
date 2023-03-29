@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   screen_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 20:25:46 by wonyang           #+#    #+#             */
-/*   Updated: 2023/03/26 15:11:51 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/29 21:33:17 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,24 @@
 static int	create_argb(int a, int rgb[3])
 {
 	return (a << 24 | rgb[0] << 16 | rgb[1] << 8 | rgb[2]);
+}
+
+void	print_mini_rect(t_mlx mlx, int x, int y, int color)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < 10)
+	{
+		j = 0;
+		while (j < 10)
+		{
+			print_dot(mlx, x + i, y + j, color);
+			j++;
+		}
+		i++;
+	}
 }
 
 void	print_dot(t_mlx mlx, int x, int y, int color)
