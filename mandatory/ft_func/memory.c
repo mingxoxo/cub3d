@@ -3,25 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   memory.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 20:32:48 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/25 17:34:22 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/29 19:24:56 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "cub3d.h"
-
-void	*ft_malloc(size_t size, t_param *param)
-{
-	void	*new;
-
-	new = malloc(size);
-	if (!new)
-		ft_perror_exit(NULL, param);
-	return (new);
-}
 
 char	**ft_free_two_array(char ***str)
 {

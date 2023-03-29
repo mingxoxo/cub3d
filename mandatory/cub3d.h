@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/29 18:45:06 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/29 19:24:51 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,6 @@ void	ft_close(int fd, t_param *param);
 void	ft_perror_exit(const char *s, t_param *param);
 void	ft_error_exit(const char *s, t_param *param);
 void	ft_img_error_exit(const char *path, t_param *param);
-void	*ft_malloc(size_t size, t_param *param);
 char	**ft_free_two_array(char ***str);
 void	ft_free_param(t_param *param);
 t_list	*ft_lstnew_cub(void *str, t_list *lst, t_param *param);
