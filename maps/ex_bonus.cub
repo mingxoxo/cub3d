@@ -1,19 +1,19 @@
-EA textures/ea.xpm
+EA textures/xpm/ea.xpm
 
-SP   textures/hero.xpm
+SP   textures/xpm/hero.xpm
 
-NO textures/no.xpm
-SO textures/so.xpm
+NO textures/xpm/no.xpm
+SO textures/xpm/so.xpm
 
-WE   textures/we.xpm
+WE   textures/xpm/we.xpm
 
-D   textures/exit.xpm
+D   textures/xpm/exit.xpm
 
 F 102,255,255
 
 C 102,153,51
 
-SP   textures/hero2.xpm
+SP   textures/xpm/hero2.xpm
 
         1111111111111111111111111
         1000000000110000000000001

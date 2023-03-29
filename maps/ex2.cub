@@ -1,10 +1,10 @@
-EA textures/ea.xpm
+EA textures/xpm/ea.xpm
 
 
-NO textures/no.xpm
-SO textures/so.xpm
+NO textures/xpm/no.xpm
+SO textures/xpm/so.xpm
 
-WE   textures/we.xpm
+WE   textures/xpm/we.xpm
 
 
 F 102,255,255
