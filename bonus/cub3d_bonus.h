@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/27 03:17:39 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/29 18:44:54 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ void	parse_map(t_list *lst, t_param *param);
 int		parse_color(t_info *info);
 void	check_map(t_param *param, t_list *lst);
 void	get_image(t_param *param);
-void 	divide_lst_by_type(t_list **m_lst, t_list **d_lst, t_list **sp_lst);
+void	divide_lst_by_type(t_list **m_lst, t_list **d_lst, t_list **sp_lst);
 int		parse_info_bonus(t_list *lst, t_img **img, int *cnt);
 int		check_bonus(t_list *map_lst, t_list *d_lst, t_list *sp_lst);
 
@@ -179,6 +179,7 @@ int		ft_open(const char *path, t_param *param);
 void	ft_close(int fd, t_param *param);
 void	ft_perror_exit(const char *s, t_param *param);
 void	ft_error_exit(const char *s, t_param *param);
+void	ft_img_error_exit(const char *path, t_param *param);
 void	*ft_malloc(size_t size, t_param *param);
 char	**ft_free_two_array(char ***str);
 void	ft_free_param(t_param *param);
