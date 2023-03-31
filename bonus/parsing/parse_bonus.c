@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 19:13:33 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 23:33:07 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/29 19:31:03 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ static int	is_element(char *line)
 {
 	int			i;
 	int			len;
-	const char	identifier[8][3] = {"NO", "SO", "WE", "EA", "F", "C", "D", "SP"};
+	const char	identifier[8][3] = {"NO", "SO", "WE", "EA", "F", "C", \
+									"D", "SP"};
 
 	if (line[0] == '\n')
 		return (TRUE);
@@ -92,18 +93,6 @@ static void	check_error(int errno, t_list *lst[4], t_param *param)
 		ft_perror_exit("param: element", param);
 }
 
-// debugging func
-// static void	print_lst(t_list *lst)
-// {
-// 	printf("------------check-------------\n");
-// 	while (lst)
-// 	{
-// 		printf("%s", (char *)(lst->content));
-// 		lst = lst->next;
-// 	}
-// 	printf("\n");
-// }
-
 void	parse(char *filename, t_param *param)
 {
 	int		errno;
@@ -114,6 +103,8 @@ void	parse(char *filename, t_param *param)
 	lst[2] = NULL;
 	lst[3] = NULL;
 	divide_lst_by_type(lst, lst + 2, lst + 3);
+	errno = check_bonus(lst[1], lst[2], lst[3]);
+	check_error(errno, lst, param);
 	errno = parse_info(lst[0], param);
 	check_error(errno, lst, param);
 	errno = parse_color(&(param->info));

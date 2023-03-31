@@ -3,25 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   memory_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 20:32:48 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 23:46:44 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/31 17:35:10 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "cub3d_bonus.h"
-
-void	*ft_malloc(size_t size, t_param *param)
-{
-	void	*new;
-
-	new = malloc(size);
-	if (!new)
-		ft_perror_exit(NULL, param);
-	return (new);
-}
 
 char	**ft_free_two_array(char ***str)
 {
@@ -56,10 +46,25 @@ static void	ft_free_color(t_color *color)
 		free(color->info);
 }
 
-void	ft_free_param(t_param *param)
+static void	ft_free_img_array(t_img **img, int cnt, void *mlx)
 {
 	int	i;
-	
+
+	if (*img)
+	{
+		i = 0;
+		while (i < cnt)
+		{
+			ft_free_img((*img) + i, mlx);
+			i++;
+		}
+		free(*img);
+		*img = 0;
+	}
+}
+
+void	ft_free_param(t_param *param)
+{
 	if (!param)
 		return ;
 	if (param->map.arr)
@@ -70,26 +75,10 @@ void	ft_free_param(t_param *param)
 	ft_free_img(&(param->info.ea), param->mlx.mlx);
 	ft_free_color(&(param->info.f));
 	ft_free_color(&(param->info.c));
-	if (param->info.d)
-	{
-		i = 0;
-		while (i < param->info.d_cnt)
-		{
-			ft_free_img(param->info.d + i, param->mlx.mlx);
-			i++;
-		}
-		free(param->info.d);
-	}
-	if (param->info.sp)
-	{
-		i = 0;
-		while (i < param->info.sp_cnt)
-		{
-			ft_free_img(param->info.sp + i, param->mlx.mlx);
-			i++;
-		}
-		free(param->info.sp);
-	}
+	ft_free_img_array(&(param->info.d), param->info.d_cnt, param->mlx.mlx);
+	ft_free_img_array(&(param->info.sp), param->info.sp_cnt, param->mlx.mlx);
+	if (param->spr.arr)
+		free(param->spr.arr);
 	if (param->mlx.mlx && param->mlx.win)
 		mlx_destroy_window(param->mlx.mlx, param->mlx.win);
 	return ;

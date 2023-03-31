@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:27:07 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 23:06:17 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/31 17:36:20 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ void	init_param(t_param *param)
 	param->info.sp = NULL;
 	param->info.d_cnt = 0;
 	param->info.sp_cnt = 0;
+	param->spr.arr = NULL;
+	param->spr.sp_cnt = 0;
 	init_img(&(param->info.no));
 	init_img(&(param->info.so));
 	init_img(&(param->info.we));

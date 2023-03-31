@@ -156,10 +156,44 @@ int main(int /*argc*/, char */*argv*/[])
 
       // calculate the real world step vector we have to add for each x (parallel to camera plane)
       // adding step by step avoids multiplications with a weight in the inner loop
+      float floorStepX = rowDistance * (rayDirX1 - rayDirX0) / screenWidth;
+      float floorStepY = rowDistance * (rayDirY1 - rayDirY0) / screenWidth;
 
       // real world coordinates of the leftmost column. This will be updated as we step to the right.
       float floorX = posX + rowDistance * rayDirX0;
       float floorY = posY + rowDistance * rayDirY0;
+
+      for(int x = 0; x < screenWidth; ++x)
+      {
+        // the cell coord is simply got from the integer parts of floorX and floorY
+        int cellX = (int)(floorX);
+        int cellY = (int)(floorY);
+
+        // get the texture coordinate from the fractional part
+        int tx = (int)(texWidth * (floorX - cellX)) & (texWidth - 1);
+        int ty = (int)(texHeight * (floorY - cellY)) & (texHeight - 1);
+
+        floorX += floorStepX;
+        floorY += floorStepY;
+
+        // choose texture and draw the pixel
+        int checkerBoardPattern = (int(cellX + cellY)) & 1;
+        int floorTexture;
+        if(checkerBoardPattern == 0) floorTexture = 3;
+        else floorTexture = 4;
+        int ceilingTexture = 6;
+        Uint32 color;
+
+        // floor
+        color = texture[floorTexture][texWidth * ty + tx];
+        color = (color >> 1) & 8355711; // make a bit darker
+        buffer[y][x] = color;
+
+        //ceiling (symmetrical, at screenHeight - y - 1 instead of y)
+        color = texture[ceilingTexture][texWidth * ty + tx];
+        color = (color >> 1) & 8355711; // make a bit darker
+        buffer[screenHeight - y - 1][x] = color;
+      }
     }
 
     // WALL CASTING
@@ -191,6 +225,26 @@ int main(int /*argc*/, char */*argv*/[])
       int side; //was a NS or a EW wall hit?
 
       //calculate step and initial sideDist
+      if(rayDirX < 0)
+      {
+        stepX = -1;
+        sideDistX = (posX - mapX) * deltaDistX;
+      }
+      else
+      {
+        stepX = 1;
+        sideDistX = (mapX + 1.0 - posX) * deltaDistX;
+      }
+      if(rayDirY < 0)
+      {
+        stepY = -1;
+        sideDistY = (posY - mapY) * deltaDistY;
+      }
+      else
+      {
+        stepY = 1;
+        sideDistY = (mapY + 1.0 - posY) * deltaDistY;
+      }
       //perform DDA
       while (hit == 0)
       {
@@ -212,10 +266,17 @@ int main(int /*argc*/, char */*argv*/[])
       }
 
       //Calculate distance of perpendicular ray (Euclidean distance would give fisheye effect!)
-      
+      if(side == 0) perpWallDist = (sideDistX - deltaDistX);
+      else          perpWallDist = (sideDistY - deltaDistY);
 
       //Calculate height of line to draw on screen
+      int lineHeight = (int)(h / perpWallDist);
+
       //calculate lowest and highest pixel to fill in current stripe
+      int drawStart = -lineHeight / 2 + h / 2;
+      if(drawStart < 0) drawStart = 0;
+      int drawEnd = lineHeight / 2 + h / 2;
+      if(drawEnd >= h) drawEnd = h - 1;
       //texturing calculations
       int texNum = worldMap[mapX][mapY] - 1; //1 subtracted from it so that texture 0 can be used!
 
@@ -332,6 +393,55 @@ int main(int /*argc*/, char */*argv*/[])
     drawBuffer(buffer[0]);
     // No need to clear the screen here, since everything is overdrawn with floor and ceiling
 
+    //timing for input and FPS counter
+    oldTime = time;
+    time = getTicks();
+    double frameTime = (time - oldTime) / 1000.0; //frametime is the time this frame has taken, in seconds
+    print(1.0 / frameTime); //FPS counter
+    redraw();
+
+    //speed modifiers
+    double moveSpeed = frameTime * 3.0; //the constant value is in squares/second
+    double rotSpeed = frameTime * 2.0; //the constant value is in radians/second
+    readKeys();
+    //move forward if no wall in front of you
+    if (keyDown(SDLK_UP))
+    {
+      if(worldMap[int(posX + dirX * moveSpeed)][int(posY)] == false) posX += dirX * moveSpeed;
+      if(worldMap[int(posX)][int(posY + dirY * moveSpeed)] == false) posY += dirY * moveSpeed;
+    }
+    //move backwards if no wall behind you
+    if(keyDown(SDLK_DOWN))
+    {
+      if(worldMap[int(posX - dirX * moveSpeed)][int(posY)] == false) posX -= dirX * moveSpeed;
+      if(worldMap[int(posX)][int(posY - dirY * moveSpeed)] == false) posY -= dirY * moveSpeed;
+    }
+    //rotate to the right
+    if(keyDown(SDLK_RIGHT))
+    {
+      //both camera direction and camera plane must be rotated
+      double oldDirX = dirX;
+      dirX = dirX * cos(-rotSpeed) - dirY * sin(-rotSpeed);
+      dirY = oldDirX * sin(-rotSpeed) + dirY * cos(-rotSpeed);
+      double oldPlaneX = planeX;
+      planeX = planeX * cos(-rotSpeed) - planeY * sin(-rotSpeed);
+      planeY = oldPlaneX * sin(-rotSpeed) + planeY * cos(-rotSpeed);
+    }
+    //rotate to the left
+    if(keyDown(SDLK_LEFT))
+    {
+      //both camera direction and camera plane must be rotated
+      double oldDirX = dirX;
+      dirX = dirX * cos(rotSpeed) - dirY * sin(rotSpeed);
+      dirY = oldDirX * sin(rotSpeed) + dirY * cos(rotSpeed);
+      double oldPlaneX = planeX;
+      planeX = planeX * cos(rotSpeed) - planeY * sin(rotSpeed);
+      planeY = oldPlaneX * sin(rotSpeed) + planeY * cos(rotSpeed);
+    }
+    if(keyDown(SDLK_ESCAPE))
+    {
+      break;
+    }
   }
 }
 

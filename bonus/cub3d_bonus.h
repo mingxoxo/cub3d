@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 23:20:34 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/31 17:41:25 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,18 @@ typedef struct s_color
 	char	*info;
 	int		rgb[3];
 }			t_color;
+
+typedef struct s_coor
+{
+	double	x;
+	double	y;
+}			t_coor;
+
+typedef struct s_spr
+{
+	t_coor	*arr;
+	int		sp_cnt;
+}			t_spr;
 
 typedef struct s_info
 {
@@ -136,6 +148,7 @@ typedef struct s_param
 	t_map	map;
 	t_info	info;
 	t_ray	ray;
+	t_spr	spr;
 	int		key[256];
 	int		mouse[2];
 }			t_param;
@@ -163,12 +176,15 @@ void	parse_map(t_list *lst, t_param *param);
 int		parse_color(t_info *info);
 void	check_map(t_param *param, t_list *lst);
 void	get_image(t_param *param);
-void 	divide_lst_by_type(t_list **m_lst, t_list **d_lst, t_list **sp_lst);
+void	divide_lst_by_type(t_list **m_lst, t_list **d_lst, t_list **sp_lst);
 int		parse_info_bonus(t_list *lst, t_img **img, int *cnt);
+int		check_bonus(t_list *map_lst, t_list *d_lst, t_list *sp_lst);
 
 // render
+void	init_sprite(t_param *param);
 void	init_ray(t_param *param);
 void	print_dot(t_mlx mlx, int x, int y, int color);
+void	print_mini_rect(t_mlx mlx, int x, int y, int color);
 void	draw_line(t_param *param, t_dda *d, int x);
 void	fill_background(t_mlx mlx, int c1[3], int c2[3]);
 void	render_screen(t_param *param);
@@ -178,7 +194,7 @@ int		ft_open(const char *path, t_param *param);
 void	ft_close(int fd, t_param *param);
 void	ft_perror_exit(const char *s, t_param *param);
 void	ft_error_exit(const char *s, t_param *param);
-void	*ft_malloc(size_t size, t_param *param);
+void	ft_img_error_exit(const char *path, t_param *param);
 char	**ft_free_two_array(char ***str);
 void	ft_free_param(t_param *param);
 t_list	*ft_lstnew_cub(void *str, t_list *lst, t_param *param);
