@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:13:11 by wonyang           #+#    #+#             */
-/*   Updated: 2023/03/26 18:50:33 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/03/31 19:49:57 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	render_screen(t_param *param)
 	int		x;
 	double	camera_x;
 	t_dda	dda;
+	double	zbuffer[WIN_WIDTH];
 
 	fill_background(param->mlx, param->info.f.rgb, param->info.c.rgb);
 	x = 0;
@@ -26,8 +27,10 @@ void	render_screen(t_param *param)
 		dda.ray_dir[X] = param->ray.dir_x + param->ray.plane_x * camera_x;
 		dda.ray_dir[Y] = param->ray.dir_y + param->ray.plane_y * camera_x;
 		draw_line(param, &dda, x);
+		zbuffer[x] = dda.w_dst;
 		x++;
 	}
+	sort_sprite(param);
 	draw_minimap(param);
 	mlx_put_image_to_window(param->mlx.mlx, param->mlx.win, \
 													param->mlx.img, 0, 0);
