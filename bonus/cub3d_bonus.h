@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/29 21:33:12 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/31 17:21:38 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,18 @@ typedef struct s_color
 	char	*info;
 	int		rgb[3];
 }			t_color;
+
+typedef struct s_coor
+{
+	double	x;
+	double	y;
+}			t_coor;
+
+typedef struct s_spr
+{
+	t_coor	*arr;
+	int		sp_cnt;
+}			t_spr;
 
 typedef struct s_info
 {
@@ -136,6 +148,7 @@ typedef struct s_param
 	t_map	map;
 	t_info	info;
 	t_ray	ray;
+	t_spr	spr;
 	int		key[256];
 	int		mouse[2];
 }			t_param;
