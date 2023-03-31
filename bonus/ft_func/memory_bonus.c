@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 20:32:48 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/29 19:29:49 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/31 17:35:10 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ void	ft_free_param(t_param *param)
 	ft_free_color(&(param->info.c));
 	ft_free_img_array(&(param->info.d), param->info.d_cnt, param->mlx.mlx);
 	ft_free_img_array(&(param->info.sp), param->info.sp_cnt, param->mlx.mlx);
+	if (param->spr.arr)
+		free(param->spr.arr);
 	if (param->mlx.mlx && param->mlx.win)
 		mlx_destroy_window(param->mlx.mlx, param->mlx.win);
 	return ;

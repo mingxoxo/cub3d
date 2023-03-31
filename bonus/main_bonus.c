@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 20:35:05 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 17:49:16 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/31 17:44:23 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(int argc, char **argv)
 	check_arg(argc, argv);
 	init_param(&param);
 	parse(argv[1], &param);
+	init_sprite(&param);
 	init_ray(&param);
 	render_screen(&param);
 	mlx_key_hook(param.mlx.win, key_release, &param);

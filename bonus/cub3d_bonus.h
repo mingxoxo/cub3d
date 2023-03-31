@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/31 17:21:38 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/31 17:41:25 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,7 @@ int		parse_info_bonus(t_list *lst, t_img **img, int *cnt);
 int		check_bonus(t_list *map_lst, t_list *d_lst, t_list *sp_lst);
 
 // render
+void	init_sprite(t_param *param);
 void	init_ray(t_param *param);
 void	print_dot(t_mlx mlx, int x, int y, int color);
 void	print_mini_rect(t_mlx mlx, int x, int y, int color);
