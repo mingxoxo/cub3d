@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 20:35:05 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/26 17:48:57 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/31 20:49:47 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,6 @@ int	loop(t_param *param)
 	if (x > WIN_WIDTH / 2 + 50)
 		rotate_right(&(param->ray), rs / (2 * WIN_WIDTH) * x - rs / 4);
 	render_screen(param);
+	param->frame++;
 	return (0);
 }

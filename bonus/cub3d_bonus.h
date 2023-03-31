@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/31 19:49:49 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/31 21:09:48 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,19 @@ typedef struct s_dda
 	int		tex[2];
 }			t_dda;
 
+typedef struct s_spc
+{
+	double	tf[2];
+	int		s_scn;
+	int		m_scn;
+	int		s_height;
+	int		s_width;
+	int		d_start[2];
+	int		d_end[2];
+	int		tex[2];
+	t_img	img;
+}			t_spc;
+
 typedef struct s_param
 {
 	t_mlx	mlx;
@@ -152,6 +165,7 @@ typedef struct s_param
 	t_spr	spr;
 	int		key[256];
 	int		mouse[2];
+	int		frame;
 }			t_param;
 
 // event.c

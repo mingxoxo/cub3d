@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:15:09 by wonyang           #+#    #+#             */
-/*   Updated: 2023/03/26 15:11:51 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/03/31 21:13:03 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	get_wall_dst(t_param *p, t_dda *d)
 	t_ray	r;
 
 	r = p->ray;
-	while (p->map.arr[d->map[X]][d->map[Y]] == '0')
+	while (p->map.arr[d->map[X]][d->map[Y]] != '1')
 	{
 		if (d->side_dst[X] < d->side_dst[Y])
 		{
