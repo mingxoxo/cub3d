@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:13:11 by wonyang           #+#    #+#             */
-/*   Updated: 2023/04/01 15:56:32 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/04/01 16:26:49 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,19 @@ void	set_sprite_size(t_spc *sp)
 
 void	draw_sprite(t_param *param, t_spc sp, double buf[WIN_WIDTH])
 {
-	int	x;
-	int	y;
-	int	d;
+	int			x;
+	int			y;
+	int			d;
 	uint32_t	color;
 
 	x = sp.d_start[X];
 	while (x < sp.d_end[X])
 	{
-		sp.tex[X] = (int)(256 * (x - (-sp.s_width / 2 + sp.s_scn)) * sp.img.w / sp.s_width) / 256;
-		if (sp.tf[Y] <= 0 || buf[x] <= sp.tf[Y])
-		{
-			x++;
-			continue ;
-		}
+		sp.tex[X] = (int)(256 * (x - (-sp.s_width / 2 + sp.s_scn)) \
+												* sp.img.w / sp.s_width) / 256;
 		y = sp.d_start[Y];
+		if (sp.tf[Y] <= 0 || buf[x] <= sp.tf[Y])
+			y = sp.d_end[Y];
 		while (y < sp.d_end[Y])
 		{
 			d = (y - sp.m_scn) * 256 - WIN_HEIGHT * 128 + sp.s_height * 128;
@@ -81,7 +79,6 @@ void	render_sprite(t_param *param, double buf[WIN_WIDTH])
 	int		i;
 	t_spc	sp;
 
-	//todo: 스프라이트 변환 속도 조절하기
 	sp.img = param->info.sp[param->frame % param->info.sp_cnt];
 	i = 0;
 	while (i < param->spr.sp_cnt)
