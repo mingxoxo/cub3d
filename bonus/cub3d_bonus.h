@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/29 21:33:12 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/03/31 21:09:48 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,19 @@ typedef struct s_color
 	int		rgb[3];
 }			t_color;
 
+typedef struct s_coor
+{
+	double	x;
+	double	y;
+	double	s_dst;
+}			t_coor;
+
+typedef struct s_spr
+{
+	t_coor	*arr;
+	int		sp_cnt;
+}			t_spr;
+
 typedef struct s_info
 {
 	t_img	no;
@@ -130,14 +143,29 @@ typedef struct s_dda
 	int		tex[2];
 }			t_dda;
 
+typedef struct s_spc
+{
+	double	tf[2];
+	int		s_scn;
+	int		m_scn;
+	int		s_height;
+	int		s_width;
+	int		d_start[2];
+	int		d_end[2];
+	int		tex[2];
+	t_img	img;
+}			t_spc;
+
 typedef struct s_param
 {
 	t_mlx	mlx;
 	t_map	map;
 	t_info	info;
 	t_ray	ray;
+	t_spr	spr;
 	int		key[256];
 	int		mouse[2];
+	int		frame;
 }			t_param;
 
 // event.c
@@ -168,6 +196,8 @@ int		parse_info_bonus(t_list *lst, t_img **img, int *cnt);
 int		check_bonus(t_list *map_lst, t_list *d_lst, t_list *sp_lst);
 
 // render
+void	sort_sprite(t_param	*param);
+void	init_sprite(t_param *param);
 void	init_ray(t_param *param);
 void	print_dot(t_mlx mlx, int x, int y, int color);
 void	print_mini_rect(t_mlx mlx, int x, int y, int color);
