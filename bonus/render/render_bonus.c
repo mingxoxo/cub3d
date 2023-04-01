@@ -6,13 +6,13 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:13:11 by wonyang           #+#    #+#             */
-/*   Updated: 2023/04/01 16:28:23 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/04/01 16:34:14 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-void	set_tf_screen(t_param *param, t_spc *sp, int i)
+static void	set_tf_screen(t_param *param, t_spc *sp, int i)
 {
 	const t_ray		r = param->ray;
 	const double	sp_x = param->spr.arr[i].x - r.pos_x;
@@ -24,7 +24,7 @@ void	set_tf_screen(t_param *param, t_spc *sp, int i)
 	sp->s_scn = (int)((WIN_WIDTH / 2) * (1 + sp->tf[X] / sp->tf[Y]));
 }
 
-void	set_sprite_size(t_spc *sp)
+static void	set_sprite_size(t_spc *sp)
 {
 	const int		u_div = 1;
 	const int		v_div = 1;
@@ -47,7 +47,7 @@ void	set_sprite_size(t_spc *sp)
 		sp->d_end[X] = WIN_WIDTH;
 }
 
-void	draw_sprite(t_param *param, t_spc sp, double buf[WIN_WIDTH])
+static void	draw_sprite(t_param *param, t_spc sp, double buf[WIN_WIDTH])
 {
 	int			x;
 	int			y;
@@ -75,12 +75,12 @@ void	draw_sprite(t_param *param, t_spc sp, double buf[WIN_WIDTH])
 	}
 }
 
-void	render_sprite(t_param *param, double buf[WIN_WIDTH])
+static void	render_sprite(t_param *param, double buf[WIN_WIDTH])
 {
 	int		i;
 	t_spc	sp;
 
-	sp.img = param->info.sp[param->frame % param->info.sp_cnt];
+	sp.img = param->info.sp[param->frame / 10 % param->info.sp_cnt];
 	i = 0;
 	while (i < param->spr.sp_cnt)
 	{
