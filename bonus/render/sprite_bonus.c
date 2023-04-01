@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 16:53:57 by wonyang           #+#    #+#             */
-/*   Updated: 2023/03/31 19:51:08 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/04/01 15:56:29 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ static void	get_sprite_coor(t_param *param)
 		{
 			if (param->map.arr[i][j] == 'A')
 			{
-				param->spr.arr[cnt].x = j + 0.5;
-				param->spr.arr[cnt].y = i + 0.5;
+				param->spr.arr[cnt].x = i + 0.5;
+				param->spr.arr[cnt].y = j + 0.5;
 				cnt++;
 			}
 			j++;

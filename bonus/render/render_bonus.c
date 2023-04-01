@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:13:11 by wonyang           #+#    #+#             */
-/*   Updated: 2023/03/31 21:10:54 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/04/01 15:56:32 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ void	draw_sprite(t_param *param, t_spc sp, double buf[WIN_WIDTH])
 	{
 		sp.tex[X] = (int)(256 * (x - (-sp.s_width / 2 + sp.s_scn)) * sp.img.w / sp.s_width) / 256;
 		if (sp.tf[Y] <= 0 || buf[x] <= sp.tf[Y])
+		{
+			x++;
 			continue ;
+		}
 		y = sp.d_start[Y];
 		while (y < sp.d_end[Y])
 		{
@@ -95,7 +98,7 @@ void	render_screen(t_param *param)
 	int		x;
 	double	camera_x;
 	t_dda	dda;
-	double	zbuffer[WIN_WIDTH];
+	double	buf[WIN_WIDTH];
 
 	fill_background(param->mlx, param->info.f.rgb, param->info.c.rgb);
 	x = 0;
@@ -105,10 +108,11 @@ void	render_screen(t_param *param)
 		dda.ray_dir[X] = param->ray.dir_x + param->ray.plane_x * camera_x;
 		dda.ray_dir[Y] = param->ray.dir_y + param->ray.plane_y * camera_x;
 		draw_line(param, &dda, x);
-		zbuffer[x] = dda.w_dst;
+		buf[x] = dda.w_dst;
 		x++;
 	}
 	sort_sprite(param);
+	render_sprite(param, buf);
 	draw_minimap(param);
 	mlx_put_image_to_window(param->mlx.mlx, param->mlx.win, \
 													param->mlx.img, 0, 0);
