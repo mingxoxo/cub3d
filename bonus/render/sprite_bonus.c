@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 16:53:57 by wonyang           #+#    #+#             */
-/*   Updated: 2023/04/01 15:56:29 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/04/01 16:19:06 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ void	init_sprite(t_param *param)
 
 static void	set_sprite_distance(t_param *param, t_coor *arr)
 {
-	const int	px = param->ray.pos_x;
-	const int	py = param->ray.pos_y;
-	int			i;
+	const double	px = param->ray.pos_x;
+	const double	py = param->ray.pos_y;
+	int				i;
 
 	i = 0;
 	while (i < param->spr.sp_cnt)

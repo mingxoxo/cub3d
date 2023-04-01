@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 20:35:05 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/31 20:49:47 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/04/01 16:10:59 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,20 @@ static void	move_front_back(t_param *param, const double ms)
 	map = param->map.arr;
 	if (param->key[KEY_W])
 	{
-		if (map[(int)(ray->pos_x + ray->dir_x * ms)][(int)(ray->pos_y)] == '0')
+		if (map[(int)(ray->pos_x + ray->dir_x * ms)][(int)(ray->pos_y)] == '0'
+		|| map[(int)(ray->pos_x + ray->dir_x * ms)][(int)(ray->pos_y)] == 'A')
 			ray->pos_x += ray->dir_x * ms;
-		if (map[(int)(ray->pos_x)][(int)(ray->pos_y + ray->dir_y * ms)] == '0')
+		if (map[(int)(ray->pos_x)][(int)(ray->pos_y + ray->dir_y * ms)] == '0'
+		|| map[(int)(ray->pos_x)][(int)(ray->pos_y + ray->dir_y * ms)] == 'A')
 			ray->pos_y += ray->dir_y * ms;
 	}
 	if (param->key[KEY_S])
 	{
-		if (map[(int)(ray->pos_x - ray->dir_x * ms)][(int)(ray->pos_y)] == '0')
+		if (map[(int)(ray->pos_x - ray->dir_x * ms)][(int)(ray->pos_y)] == '0'
+		|| map[(int)(ray->pos_x - ray->dir_x * ms)][(int)(ray->pos_y)] == 'A')
 			ray->pos_x -= ray->dir_x * ms;
-		if (map[(int)(ray->pos_x)][(int)(ray->pos_y - ray->dir_y * ms)] == '0')
+		if (map[(int)(ray->pos_x)][(int)(ray->pos_y - ray->dir_y * ms)] == '0'
+		|| map[(int)(ray->pos_x)][(int)(ray->pos_y - ray->dir_y * ms)] == 'A')
 			ray->pos_y -= ray->dir_y * ms;
 	}
 }
@@ -45,16 +49,20 @@ static void	move_left_right(t_param *param, const double ms)
 	map = param->map.arr;
 	if (param->key[KEY_A])
 	{
-		if (map[(int)(ray->pos_x - ray->dir_y * ms)][(int)(ray->pos_y)] == '0')
+		if (map[(int)(ray->pos_x - ray->dir_y * ms)][(int)(ray->pos_y)] == '0'
+		|| map[(int)(ray->pos_x - ray->dir_y * ms)][(int)(ray->pos_y)] == 'A')
 			ray->pos_x -= ray->dir_y * ms;
-		if (map[(int)(ray->pos_x)][(int)(ray->pos_y + ray->dir_x * ms)] == '0')
+		if (map[(int)(ray->pos_x)][(int)(ray->pos_y + ray->dir_x * ms)] == '0'
+		|| map[(int)(ray->pos_x)][(int)(ray->pos_y + ray->dir_x * ms)] == 'A')
 			ray->pos_y += ray->dir_x * ms;
 	}
 	if (param->key[KEY_D])
 	{
-		if (map[(int)(ray->pos_x + ray->dir_y * ms)][(int)(ray->pos_y)] == '0')
+		if (map[(int)(ray->pos_x + ray->dir_y * ms)][(int)(ray->pos_y)] == '0'
+		|| map[(int)(ray->pos_x + ray->dir_y * ms)][(int)(ray->pos_y)] == 'A')
 			ray->pos_x += ray->dir_y * ms;
-		if (map[(int)(ray->pos_x)][(int)(ray->pos_y - ray->dir_x * ms)] == '0')
+		if (map[(int)(ray->pos_x)][(int)(ray->pos_y - ray->dir_x * ms)] == '0'
+		|| map[(int)(ray->pos_x)][(int)(ray->pos_y - ray->dir_x * ms)] == 'A')
 			ray->pos_y -= ray->dir_x * ms;
 	}
 }
