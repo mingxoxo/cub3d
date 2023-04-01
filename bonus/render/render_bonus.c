@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:13:11 by wonyang           #+#    #+#             */
-/*   Updated: 2023/04/01 16:26:49 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/04/01 16:28:23 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ void	draw_sprite(t_param *param, t_spc sp, double buf[WIN_WIDTH])
 			d = (y - sp.m_scn) * 256 - WIN_HEIGHT * 128 + sp.s_height * 128;
 			sp.tex[Y] = ((d * sp.img.h) / sp.s_height) / 256;
 			color = ((uint32_t *)sp.img.data)[sp.img.w * sp.tex[Y] + sp.tex[X]];
-			print_dot(param->mlx, x, y, color);
+			if (color != 0xFFFFFF)
+				print_dot(param->mlx, x, y, color);
 			y++;
 		}
 		x++;
