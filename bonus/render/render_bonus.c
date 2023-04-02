@@ -6,10 +6,11 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:13:11 by wonyang           #+#    #+#             */
-/*   Updated: 2023/04/01 16:34:14 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/04/02 17:11:45 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "cub3d_bonus.h"
 
 static void	set_tf_screen(t_param *param, t_spc *sp, int i)
@@ -31,14 +32,14 @@ static void	set_sprite_size(t_spc *sp)
 	const double	v_move = 0.0;
 
 	sp->m_scn = (int)(v_move / sp->tf[Y]);
-	sp->s_height = abs((int)(WIN_HEIGHT / sp->tf[Y])) / v_div;
+	sp->s_height = (int)fabs(WIN_HEIGHT / sp->tf[Y]) / v_div;
 	sp->d_start[Y] = -sp->s_height / 2 + WIN_HEIGHT / 2 + sp->m_scn;
 	if (sp->d_start[Y] < 0)
 		sp->d_start[Y] = 0;
 	sp->d_end[Y] = sp->s_height / 2 + WIN_HEIGHT / 2 + sp->m_scn;
 	if (sp->d_end[Y] >= WIN_HEIGHT)
 		sp->d_end[Y] = WIN_HEIGHT - 1;
-	sp->s_width = abs((int)(WIN_HEIGHT / sp->tf[Y])) / u_div;
+	sp->s_width = (int)fabs(WIN_HEIGHT / sp->tf[Y]) / u_div;
 	sp->d_start[X] = -sp->s_width / 2 + sp->s_scn;
 	if (sp->d_start[X] < 0)
 		sp->d_start[X] = 0;
