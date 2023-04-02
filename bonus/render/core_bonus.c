@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:15:09 by wonyang           #+#    #+#             */
-/*   Updated: 2023/03/31 21:13:03 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/04/02 16:55:05 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ static void	get_wall_dst(t_param *p, t_dda *d)
 	t_ray	r;
 
 	r = p->ray;
-	while (p->map.arr[d->map[X]][d->map[Y]] != '1')
+	while (p->map.arr[d->map[X]][d->map[Y]] != '1'
+		&& p->map.arr[d->map[X]][d->map[Y]] != 'D')
 	{
 		if (d->side_dst[X] < d->side_dst[Y])
 		{
@@ -79,7 +80,9 @@ static void	get_length_img(t_param *param, t_dda *dda)
 	dda->draw[1] = dda->l_height / 2 + WIN_HEIGHT / 2;
 	if (dda->draw[1] >= WIN_HEIGHT)
 		dda->draw[1] = WIN_HEIGHT - 1;
-	if (dda->side == 0 && dda->ray_dir[X] > 0)
+	if (param->map.arr[dda->map[X]][dda->map[Y]] == 'D')
+		dda->img = param->info.d[0];
+	else if (dda->side == 0 && dda->ray_dir[X] > 0)
 		dda->img = param->info.no;
 	else if (dda->side == 0 && dda->ray_dir[X] <= 0)
 		dda->img = param->info.so;
