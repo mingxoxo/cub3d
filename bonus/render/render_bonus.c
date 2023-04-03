@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:13:11 by wonyang           #+#    #+#             */
-/*   Updated: 2023/04/02 17:11:45 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/04/03 17:43:39 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ static void	render_sprite(t_param *param, double buf[WIN_WIDTH])
 	int		i;
 	t_spc	sp;
 
+	if (param->spr.sp_cnt == 0)
+		return ;
 	sp.img = param->info.sp[param->frame / 10 % param->info.sp_cnt];
 	i = 0;
 	while (i < param->spr.sp_cnt)
