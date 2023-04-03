@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   screen_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 20:25:46 by wonyang           #+#    #+#             */
-/*   Updated: 2023/03/29 21:33:17 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/04/02 17:56:26 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
+
+int	can_move(int x, int y, char **map)
+{
+	if (map[x][y] == '0' || map[x][y] == 'A' || map[x][y] == 'O')
+		return (1);
+	return (0);
+}
 
 static int	create_argb(int a, int rgb[3])
 {

@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/31 21:09:48 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/04/02 17:56:43 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ enum	e_keycode
 	KEY_S = 1,
 	KEY_D = 2,
 	KEY_LEFT = 123,
-	KEY_RIGHT = 124
+	KEY_RIGHT = 124,
+	KEY_SPACE = 49
 };
 
 typedef struct s_node
@@ -196,6 +197,7 @@ int		parse_info_bonus(t_list *lst, t_img **img, int *cnt);
 int		check_bonus(t_list *map_lst, t_list *d_lst, t_list *sp_lst);
 
 // render
+int		can_move(int x, int y, char **map);
 void	sort_sprite(t_param	*param);
 void	init_sprite(t_param *param);
 void	init_ray(t_param *param);
