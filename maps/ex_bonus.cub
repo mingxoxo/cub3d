@@ -7,8 +7,7 @@ SO textures/xpm/so.xpm
 
 WE   textures/xpm/we.xpm
 
-D   textures/xpm/close_door.xpm
-D   textures/xpm/open_door.xpm
+D   textures/xpm/door.xpm
 
 F 102,255,255
 

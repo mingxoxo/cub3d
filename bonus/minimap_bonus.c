@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 02:06:18 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/29 21:42:42 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/04/03 17:31:59 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,17 @@ static void	draw_player_view(t_mlx mlx, t_ray ray, int s[2])
 static int	matching_color(char c)
 {
 	int			i;
-	const char	*identifier = " 1DA";
-	const int	color[5] = {0x333333, 0x050099, 0x8B4513, 0xEE82EE, 0xD5D5D5};
+	const char	*identifier = " 1DOA";
+	const int	color[5] = {0x333333, 0x050099, 0x8B4513, 0xCC9966, 0xEE82EE};
 
 	i = 0;
-	while (i < 4)
+	while (i < 5)
 	{
 		if (c == identifier[i])
 			return (color[i]);
 		i++;
 	}
-	return (color[4]);
+	return (0xD5D5D5);
 }
 
 void	draw_minimap(t_param *param)

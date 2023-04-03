@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 16:53:57 by wonyang           #+#    #+#             */
-/*   Updated: 2023/04/01 16:19:06 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/04/03 17:43:51 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	init_sprite(t_param *param)
 {
 	const int	cnt = get_sprite_count(param);
 
+	if (cnt == 0)
+		return ;
 	param->spr.arr = (t_coor *)malloc(sizeof(t_coor) * cnt);
 	param->spr.sp_cnt = cnt;
 	if (param->spr.arr == NULL)
@@ -93,6 +95,8 @@ void	sort_sprite(t_param	*param)
 	int				j;
 	t_coor			tmp;
 
+	if (param->spr.sp_cnt == 0)
+		return ;
 	arr = param->spr.arr;
 	set_sprite_distance(param, arr);
 	i = 0;
