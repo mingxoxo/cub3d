@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   error_exit_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 20:32:48 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/03/29 19:23:25 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/04/04 17:55:24 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include "cub3d_bonus.h"

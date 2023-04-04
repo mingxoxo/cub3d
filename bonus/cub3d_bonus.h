@@ -6,14 +6,13 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 16:33:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/04/02 17:56:43 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/04/04 17:55:38 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_BONUS_H
 # define CUB3D_BONUS_H
 
-# include <stdio.h>
 # include "libft.h"
 # include "../mlx_opengl/mlx.h"
 
@@ -198,6 +197,7 @@ int		check_bonus(t_list *map_lst, t_list *d_lst, t_list *sp_lst);
 
 // render
 int		can_move(int x, int y, char **map);
+void	render_sprite(t_param *param, double buf[WIN_WIDTH]);
 void	sort_sprite(t_param	*param);
 void	init_sprite(t_param *param);
 void	init_ray(t_param *param);
