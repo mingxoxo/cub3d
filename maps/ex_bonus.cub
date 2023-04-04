@@ -1,6 +1,7 @@
 EA textures/xpm/ea.xpm
 
-SP   textures/xpm/hero.xpm
+SP   textures/xpm/tree_left.xpm
+SP   textures/xpm/tree.xpm
 
 NO textures/xpm/no.xpm
 SO textures/xpm/so.xpm
@@ -13,10 +14,12 @@ F 102,255,255
 
 C 102,153,51
 
-SP   textures/xpm/hero2.xpm
+SP   textures/xpm/tree_right.xpm
+SP   textures/xpm/tree.xpm
+
 
         1111111111111111111111111
-        1000000000110000000000001
+        1A00000000110000000000001
         1011000001110000000000001
         1001000000000000000000001
 111111111011000001110000000000001

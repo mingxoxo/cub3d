@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:13:11 by wonyang           #+#    #+#             */
-/*   Updated: 2023/03/26 18:50:19 by jeongmin         ###   ########seoul.kr  */
+/*   Updated: 2023/04/04 17:52:28 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	render_screen(t_param *param)
 	double	camera_x;
 	t_dda	dda;
 
+	mlx_clear_window(param->mlx.mlx, param->mlx.win);
 	fill_background(param->mlx, param->info.f.rgb, param->info.c.rgb);
 	x = 0;
 	while (x < WIN_WIDTH)
