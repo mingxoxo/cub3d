@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+         #
+#    By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/04 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/04/04 17:51:13 by wonyang          ###   ########seoul.kr   #
+#    Updated: 2023/04/08 18:04:59 by jeongmin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # define compile options
-NAME		= cub3d
+NAME		= cub3D
 LIBFT		= libft
 LIBFT_HEADER = libft.h
 LIBFT_LIB	= $(LIBFT)/libft.a

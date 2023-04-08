@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 15:53:57 by wonyang           #+#    #+#             */
-/*   Updated: 2023/03/26 00:00:10 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/04/08 18:09:21 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,28 @@ static int	error_handler(int errno, char ***split)
 	return (errno);
 }
 
+static int	count_delimiters(char *str)
+{
+	int	cnt;
+
+	cnt = 0;
+	while (*str)
+	{
+		if (*str == ',')
+			cnt++;
+		str++;
+	}
+	return (cnt);
+}
+
 static int	parse_rgb(t_color *color)
 {
 	int		i;
 	int		errno;
 	char	**split;
 
+	if (count_delimiters(color->info) != 2)
+		return (ERROR);
 	split = ft_split(color->info, ',');
 	if (!split)
 		return (ALLOC_FAILED);

@@ -10,9 +10,9 @@ WE   textures/xpm/we.xpm
 
 D   textures/xpm/door.xpm
 
-F 102,255,255
+C 102,255,255
 
-C 102,153,51
+F 102,153,51
 
 SP   textures/xpm/tree_right.xpm
 SP   textures/xpm/tree.xpm
