@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:13:11 by wonyang           #+#    #+#             */
-/*   Updated: 2023/04/04 17:52:28 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/04/08 18:05:42 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	render_screen(t_param *param)
 	t_dda	dda;
 
 	mlx_clear_window(param->mlx.mlx, param->mlx.win);
-	fill_background(param->mlx, param->info.f.rgb, param->info.c.rgb);
+	fill_background(param->mlx, param->info.c.rgb, param->info.f.rgb);
 	x = 0;
 	while (x < WIN_WIDTH)
 	{
